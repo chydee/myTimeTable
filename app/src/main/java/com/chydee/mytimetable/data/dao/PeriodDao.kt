@@ -2,6 +2,7 @@ package com.chydee.mytimetable.data.dao
 
 import androidx.room.*
 import com.chydee.mytimetable.data.models.Period
+import com.chydee.mytimetable.utils.Constants
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -41,7 +42,7 @@ interface PeriodDao {
      *
      * This does not delete the table, only its contents.
      */
-    @Query("DELETE FROM period_table")
+    @Query("DELETE FROM ${Constants.PERIOD_TABLE_NAME}")
     fun deleteAll()
 
 
@@ -49,10 +50,10 @@ interface PeriodDao {
      * Get all periods from period_table
      *
      */
-    @Query("SELECT * FROM period_table ORDER BY id DESC")
+    @Query("SELECT * FROM ${Constants.PERIOD_TABLE_NAME} ORDER BY id DESC")
     fun getAllPeriods(): Flow<List<Period>>
 
-    @Query("SELECT * FROM period_table WHERE day_of_week LIKE :today")
+    @Query("SELECT * FROM ${Constants.PERIOD_TABLE_NAME} WHERE day_of_week LIKE :today")
     fun getTodayPeriod(today: String): Flow<List<Period>>
 
     @ExperimentalCoroutinesApi
