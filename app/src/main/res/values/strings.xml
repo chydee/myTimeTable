@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">myTimeTable</string>
+    <string name="versionCode">v-1.0.0</string>
 </resources>
