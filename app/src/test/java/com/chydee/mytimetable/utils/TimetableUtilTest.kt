@@ -6,6 +6,15 @@ import org.junit.Test
 class TimetableUtilTest {
 
     @Test
+    fun `when every field is empty or invalid return false`() {
+        val result = TimetableUtil.validateTimetableInput(
+            "", -1, "", "", -1, "", "",
+            "", "", ""
+        )
+        assertThat(result).isFalse()
+    }
+
+    @Test
     fun `when timeTable for already exists return false`() {
         val result = TimetableUtil.validateTimetableInput(
             "Geology", 0, "CSC111", "Intro To Computing", 5, "Test tutor", "1000PK",
@@ -24,13 +33,14 @@ class TimetableUtilTest {
     }
 
     @Test
-    fun `when every field is empty or invalid return false`() {
+    fun `when course title contains a number return false`() {
         val result = TimetableUtil.validateTimetableInput(
-            "", -1, "", "", -1, "", "",
-            "", "", ""
+            "Language", 0, "CSC111", "Intro To Computing 101", 5, "Test tutor", "1000PK",
+            "Mon", "11:00", "13:00"
         )
         assertThat(result).isFalse()
     }
+
 
     @Test
     fun `empty course code returns false`() {
@@ -95,4 +105,6 @@ class TimetableUtilTest {
         )
         assertThat(result).isFalse()
     }
+
+
 }
