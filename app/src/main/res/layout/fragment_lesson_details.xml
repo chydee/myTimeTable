@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LessonDetailsFragment">
+
+    <ImageView
+        android:id="@+id/createNewLessonIllustration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:contentDescription="@string/new_lesson_illustration_desc"
+        app:srcCompat="@drawable/create_lesson_illustration" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/lessonDetailsGuideLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="150dp"
+                app:layout_constraintGuide_end="@dimen/dp_16" />
+
+            <TextView
+                android:id="@+id/lessonTitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_30"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Title"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/sp_18"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/lessonDetailsGuideLine" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/lessonDetailsGuideLine2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="230dp"
+                app:layout_constraintGuide_end="@dimen/dp_16" />
+
+            <TextView
+                android:id="@+id/lessonDescriptionTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:fontFamily="@font/poppins"
+                android:text="This is a simple description. this is a simple description.this is a simple description."
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/lessonDetailsGuideLine2" />
+
+            <TextView
+                android:id="@+id/lessonTutorName"
+                style="@style/LessonDetailsTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_24"
+                android:text="Mr Rubie"
+                app:drawableStartCompat="@drawable/ic_teacher"
+                app:layout_constraintEnd_toEndOf="@+id/lessonDescriptionTextView"
+                app:layout_constraintStart_toStartOf="@+id/lessonDescriptionTextView"
+                app:layout_constraintTop_toBottomOf="@+id/lessonDescriptionTextView" />
+
+            <TextView
+                android:id="@+id/lessonPlaceOrLocation"
+                style="@style/LessonDetailsTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="Africa | Earth"
+                app:drawableStartCompat="@drawable/ic_pin"
+                app:layout_constraintEnd_toEndOf="@+id/lessonTutorName"
+                app:layout_constraintStart_toStartOf="@+id/lessonTutorName"
+                app:layout_constraintTop_toBottomOf="@+id/lessonTutorName" />
+
+            <TextView
+                android:id="@+id/lessonDuration"
+                style="@style/LessonDetailsTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="Mondays, 2:11 am - 3:pm"
+                app:drawableStartCompat="@drawable/ic_time"
+                app:layout_constraintEnd_toEndOf="@+id/lessonPlaceOrLocation"
+                app:layout_constraintStart_toStartOf="@+id/lessonPlaceOrLocation"
+                app:layout_constraintTop_toBottomOf="@+id/lessonPlaceOrLocation" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/customUpBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_16"
+        android:fontFamily="@font/poppins"
+        android:text="CSC111"
+        android:textColor="@color/secondaryTextColor"
+        app:backgroundTint="@color/primaryTextColor"
+        app:cornerRadius="@dimen/dp_10"
+        app:icon="@drawable/ic_chevron_left"
+        app:iconTint="@color/secondaryTextColor" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnEditLesson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/dp_16"
+        android:contentDescription="@string/edit_lesson_fab_desc"
+        app:backgroundTint="@color/primaryDarkColor"
+        app:elevation="@dimen/dp_14"
+        app:srcCompat="@drawable/ic_pen"
+        app:tint="@color/primaryTextColor" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

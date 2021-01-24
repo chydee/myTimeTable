@@ -7,27 +7,32 @@
     app:statusBarBackground="@android:color/transparent"
     tools:context=".NewLessonFragment">
 
+    <ImageView
+        android:id="@+id/createNewLessonIllustration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:contentDescription="@string/new_lesson_illustration_desc"
+        app:srcCompat="@drawable/create_lesson_illustration" />
+
     <ScrollView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginBottom="20dp"
         android:fillViewport="true"
-        android:layout_height="match_parent"
         android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/createNewLessonIllustration"
-                android:layout_width="match_parent"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/newLessonGuideLine"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:contentDescription="@string/new_lesson_illustration_desc"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/create_lesson_illustration" />
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="230dp"
+                app:layout_constraintGuide_end="@dimen/dp_16" />
 
             <TextView
                 android:id="@+id/labelTextBasic"
@@ -40,7 +45,7 @@
                 android:text="@string/basic_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/createNewLessonIllustration" />
+                app:layout_constraintTop_toBottomOf="@+id/newLessonGuideLine" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/titleTextInputLayout"
@@ -283,4 +288,16 @@
         app:cornerRadius="@dimen/dp_10"
         app:icon="@drawable/ic_chevron_left"
         app:iconTint="@color/secondaryTextColor" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnEditLesson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/dp_16"
+        android:contentDescription="@string/edit_lesson_fab_desc"
+        app:backgroundTint="#EB5757"
+        app:elevation="@dimen/dp_14"
+        app:srcCompat="@drawable/ic_trash"
+        app:tint="@color/primaryTextColor" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -23,5 +23,11 @@
     <string name="day_label">Day</string>
     <string name="from_label">From</string>
     <string name="to_label">To</string>
+    <string name="edit_lesson_fab_desc">An Icon that looks like a pen indicating that lesson is editable</string>
+    <string name="hi_there_text">Hi There!</string>
+    <string name="class_in"><![CDATA[You have <b>CSC109</b> class in 7 minutes time.]]></string>
+    <string name="click_to_see_details"><u>Click to see details</u></string>
+    <string name="today_label">Today</string>
+    <string name="see_all">see all...</string>
     <!--New Lesson-->
 </resources>

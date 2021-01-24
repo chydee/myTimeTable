@@ -16,4 +16,12 @@
         <item name="android:textColor">@color/secondaryTextColor</item>
         <item name="android:textSize">@dimen/sp_14</item>
     </style>
+
+    <style name="LessonDetailsTextView">
+        <item name="android:drawablePadding">@dimen/dp_8</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">#4F4F4F</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 </resources>
