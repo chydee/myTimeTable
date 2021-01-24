@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="NewLessonsInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@color/inout_box_bg_color</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/dp_10</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/dp_10</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/dp_10</item>
+        <item name="boxCornerRadiusTopStart">@dimen/dp_10</item>
+        <item name="boxStrokeColor">@null</item>
+        <item name="boxStrokeWidth">0dp</item>
+    </style>
+
+    <style name="NewLessonLabels">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/secondaryTextColor</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+</resources>

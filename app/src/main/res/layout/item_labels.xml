@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/labelCard"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:cardBackgroundColor="@color/secondaryTextColor"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="@dimen/dp_14">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/checkImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:contentDescription="@string/check_image_desc"
+            app:srcCompat="@drawable/ic_baseline_check" />
+    </com.google.android.material.card.MaterialCardView>
 </layout>

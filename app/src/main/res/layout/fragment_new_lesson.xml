@@ -1,14 +1,286 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:statusBarBackground="@android:color/transparent"
     tools:context=".NewLessonFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
+        android:layout_marginBottom="20dp"
+        android:fillViewport="true"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:scrollbars="none">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/createNewLessonIllustration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:contentDescription="@string/new_lesson_illustration_desc"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/create_lesson_illustration" />
+
+            <TextView
+                android:id="@+id/labelTextBasic"
+                style="@style/NewLessonLabels"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_18"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:text="@string/basic_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createNewLessonIllustration" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/titleTextInputLayout"
+                style="@style/NewLessonsInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="@string/lesson_title_hint"
+                app:hintEnabled="true"
+                app:layout_constraintEnd_toEndOf="@+id/labelTextBasic"
+                app:layout_constraintStart_toStartOf="@+id/labelTextBasic"
+                app:layout_constraintTop_toBottomOf="@+id/labelTextBasic"
+                app:startIconDrawable="@drawable/ic_edit_flip">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/titleInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textSize="@dimen/sp_14" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/descriptionTextInputLayout"
+                style="@style/NewLessonsInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
+                android:hint="@string/description_hint"
+                app:hintEnabled="true"
+                app:layout_constraintEnd_toEndOf="@+id/labelTextBasic"
+                app:layout_constraintStart_toStartOf="@+id/labelTextBasic"
+                app:layout_constraintTop_toBottomOf="@+id/titleTextInputLayout"
+                app:startIconDrawable="@drawable/ic_edit_flip">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/descriptionInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textSize="@dimen/sp_14" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/labelTextLabel"
+                style="@style/NewLessonLabels"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:text="@string/label_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionTextInputLayout" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/labelTextLabel"
+                app:layout_constraintStart_toStartOf="@+id/labelTextLabel"
+                app:layout_constraintTop_toBottomOf="@+id/labelTextLabel"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_labels" />
+
+            <TextView
+                android:id="@+id/extraDataTextLabel"
+                style="@style/NewLessonLabels"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:text="@string/label_extra_data"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/teacherTextInputLayout"
+                style="@style/NewLessonsInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
+                android:hint="@string/teacher_hint"
+                app:hintEnabled="true"
+                app:layout_constraintEnd_toEndOf="@+id/labelTextBasic"
+                app:layout_constraintStart_toStartOf="@+id/labelTextBasic"
+                app:layout_constraintTop_toBottomOf="@+id/extraDataTextLabel"
+                app:startIconDrawable="@drawable/ic_teacher">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/teacherInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textSize="@dimen/sp_14" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/placeTextInputLayout"
+                style="@style/NewLessonsInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="@string/place_hint"
+                app:hintEnabled="true"
+                app:layout_constraintEnd_toEndOf="@+id/labelTextBasic"
+                app:layout_constraintStart_toStartOf="@+id/labelTextBasic"
+                app:layout_constraintTop_toBottomOf="@+id/teacherTextInputLayout"
+                app:startIconDrawable="@drawable/ic_pin">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/placeInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textSize="@dimen/sp_14" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/dayTextLabel"
+                style="@style/NewLessonLabels"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="@string/day_label"
+                app:layout_constraintStart_toStartOf="@+id/dayTextInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/placeTextInputLayout" />
+
+            <TextView
+                android:id="@+id/fromTextLabel"
+                style="@style/NewLessonLabels"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="@string/from_label"
+                app:layout_constraintStart_toStartOf="@+id/fromTextInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/placeTextInputLayout" />
+
+            <TextView
+                android:id="@+id/toTextLabel"
+                style="@style/NewLessonLabels"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="@string/to_label"
+                app:layout_constraintStart_toStartOf="@+id/toTextInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/placeTextInputLayout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dayTextInputLayout"
+                style="@style/NewLessonsInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:hint="@string/place_hint"
+                app:hintEnabled="false"
+                app:layout_constraintStart_toStartOf="@+id/labelTextBasic"
+                app:layout_constraintTop_toBottomOf="@+id/dayTextLabel"
+                app:startIconDrawable="@drawable/ic_chevron_down">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dayInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:text="Mon"
+                    android:textColor="@color/extra_data_text_color"
+                    android:textSize="@dimen/sp_14" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fromTextInputLayout"
+                style="@style/NewLessonsInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                app:layout_constraintEnd_toStartOf="@+id/toTextInputLayout"
+                app:layout_constraintStart_toEndOf="@+id/dayTextInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/dayTextLabel">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fromInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins"
+                    android:inputType="none"
+                    android:singleLine="true"
+                    android:text="02:13PM"
+                    android:textColor="@color/extra_data_text_color"
+                    android:textSize="@dimen/sp_14" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/toTextInputLayout"
+                style="@style/NewLessonsInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                app:layout_constraintEnd_toEndOf="@+id/placeTextInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/dayTextLabel">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/toInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins"
+                    android:inputType="none"
+                    android:singleLine="true"
+                    android:text="05:13PM"
+                    android:textColor="@color/extra_data_text_color"
+                    android:textSize="@dimen/sp_14" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/customUpBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_16"
+        android:fontFamily="@font/poppins"
+        android:text="CSC111"
+        android:textColor="@color/secondaryTextColor"
+        app:backgroundTint="@color/primaryTextColor"
+        app:cornerRadius="@dimen/dp_10"
+        app:icon="@drawable/ic_chevron_left"
+        app:iconTint="@color/secondaryTextColor" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
