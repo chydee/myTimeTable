@@ -12,13 +12,13 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="5dp"
-        android:minHeight="100dp">
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/dp_8"
+        app:cardElevation="@dimen/dp_4">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -28,7 +28,7 @@
                 android:background="@color/black"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="D"
+                android:text="@{lesson.courseCode}"
                 android:textAlignment="gravity"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/sp_18" />
@@ -46,13 +46,13 @@
                     android:layout_marginTop="@dimen/dp_16"
                     android:layout_marginEnd="@dimen/dp_16"
                     android:fontFamily="@font/poppins_medium"
+                    android:text="@{lesson.courseTitle}"
                     android:textColor="@color/secondaryTextColor"
                     android:textSize="@dimen/sp_22"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Geography" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/courseTime"
@@ -67,7 +67,7 @@
                     app:layout_constraintStart_toStartOf="@+id/courseTitle"
                     app:layout_constraintTop_toBottomOf="@+id/courseTitle"
                     app:layout_constraintVertical_bias="0.0"
-                    tools:text="07:30 - 08:15" />
+                    tools:text="@{String.format(@string/lesson_duration, lesson.startTime, lesson.endTime)}" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

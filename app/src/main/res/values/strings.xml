@@ -5,6 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="new_lesson_illustration_desc">An Image Showing aa Tutor standing at the board and some students sitting and listening</string>
 
+
     <!-- Label -->
     <string name="basic_label">Basic</string>
     <string name="label_label">Label</string>
@@ -25,9 +26,13 @@
     <string name="to_label">To</string>
     <string name="edit_lesson_fab_desc">An Icon that looks like a pen indicating that lesson is editable</string>
     <string name="hi_there_text">Hi There!</string>
-    <string name="class_in"><![CDATA[You have <b>CSC109</b> class in 7 minutes time.]]></string>
+    <string name="class_in">You have <b>%s</b> class in %d minutes time.</string>
     <string name="click_to_see_details"><u>Click to see details</u></string>
     <string name="today_label">Today</string>
-    <string name="see_all">see all...</string>
+    <string name="see_all">see all…</string>
     <!--New Lesson-->
+
+    <!--Home-->
+    <string name="lesson_duration">%s - %s</string>
+    <!--Home-->
 </resources>

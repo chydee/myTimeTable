@@ -7,7 +7,7 @@ import com.chydee.mytimetable.databinding.ItemDayEventsBinding
 class DayEventsViewHolder(private var binding: ItemDayEventsBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(lesson: Lesson) {
-        binding.period = lesson
+        binding.lesson = lesson
         binding.executePendingBindings()
     }
 }

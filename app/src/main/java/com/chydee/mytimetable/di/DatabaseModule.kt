@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.chydee.mytimetable.data.MyTimetableDB
 import com.chydee.mytimetable.data.dao.LessonDao
-import com.chydee.mytimetable.utils.Constants
+import com.chydee.mytimetable.utils.TEST_DB_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,7 +23,7 @@ object DatabaseModule {
     ) = Room.databaseBuilder(
         app,
         MyTimetableDB::class.java,
-        Constants.TEST_DB_NAME
+        TEST_DB_NAME
     ).fallbackToDestructiveMigration()
         .build()
 

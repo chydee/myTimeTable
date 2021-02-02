@@ -30,9 +30,8 @@ class MyWorker @WorkerInject constructor(
         val appContext = applicationContext
 
         return try {
-            showNotifSomeMinutesToClass(appContext)
+            showNotificationSomeMinutesToClass(appContext)
             notifyMeOfClassesForTheDay(appContext)
-
             //Return if successful
             Result.success()
         } catch (throwable: Throwable) {
@@ -42,7 +41,7 @@ class MyWorker @WorkerInject constructor(
         }
     }
 
-    private fun showNotifSomeMinutesToClass(context: Context) {
+    private fun showNotificationSomeMinutesToClass(context: Context) {
         notify("Upcoming class", "You have a class in 30mins time\n Click to view details", context)
     }
 
