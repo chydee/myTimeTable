@@ -26,7 +26,7 @@
     <string name="to_label">To</string>
     <string name="edit_lesson_fab_desc">An Icon that looks like a pen indicating that lesson is editable</string>
     <string name="hi_there_text">Hi There!</string>
-    <string name="class_in">You have <b>%s</b> class in %d minutes time.</string>
+    <string name="class_in">You have <b>%s</b> class in %s minutes time.</string>
     <string name="click_to_see_details"><u>Click to see details</u></string>
     <string name="today_label">Today</string>
     <string name="see_all">see all…</string>
@@ -34,5 +34,7 @@
 
     <!--Home-->
     <string name="lesson_duration">%s - %s</string>
+    <string name="a_lady_avatar_img_desc">A Lady Avatar</string>
+    <string name="no_lesson">You have no class for today 🙂</string>
     <!--Home-->
 </resources>

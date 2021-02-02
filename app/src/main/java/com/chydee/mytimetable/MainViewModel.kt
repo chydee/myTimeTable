@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class MainViewModel @Inject constructor(private val dbImpl: DBHelperImpl) : ViewModel() {
 
-    private var viewModelJob = Job()
+    private var viewModelJob = SupervisorJob()
     private val scope = CoroutineScope(viewModelJob + Dispatchers.IO)
 
     private val _currentDayLessons = MutableLiveData<List<Lesson>>()
@@ -25,8 +25,11 @@ class MainViewModel @Inject constructor(private val dbImpl: DBHelperImpl) : View
     fun addLesson(lesson: Lesson) {
         Status.LOADING
         scope.launch {
-            dbImpl.insert(lesson)
-            Status.SUCCESS
+            withContext(Dispatchers.Default) {
+                dbImpl.insert(lesson)
+                Status.SUCCESS
+            }
+
         }
     }
 
@@ -34,8 +37,10 @@ class MainViewModel @Inject constructor(private val dbImpl: DBHelperImpl) : View
         scope.launch {
             Status.LOADING
             try {
-                dbImpl.insert(lessons)
-                Status.SUCCESS
+                withContext(Dispatchers.Default) {
+                    dbImpl.insert(lessons)
+                    Status.SUCCESS
+                }
             } catch (ex: Exception) {
                 Status.ERROR
                 Timber.d(ex)

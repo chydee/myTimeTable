@@ -11,19 +11,14 @@ import com.chydee.mytimetable.data.models.Lesson
 import com.chydee.mytimetable.databinding.HomeFragmentBinding
 import com.chydee.mytimetable.ui.adapters.DayEventsAdapter
 import com.chydee.mytimetable.ui.adapters.OnLessonClickListener
-import com.chydee.mytimetable.utils.CURRENT_DAY_FORMAT
-import com.chydee.mytimetable.utils.MarginItemDecoration
-import com.chydee.mytimetable.utils.autoCleared
+import com.chydee.mytimetable.utils.*
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -39,43 +34,96 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         setupRecyclerView()
-
+        getCurrentDayLessons(getDayOfTheWeek())
     }
 
-    private fun getTodayClasses() {}
+    private fun handleClickEvents() {
+        binding.btnDismiss.setOnClickListener {
+            binding.defaultWelcomeCard.hide() //This hides or removes the view when users hit the dismiss button
+        }
 
+        binding.textBtnClickToSeeDetails.setOnClickListener {
+
+        }
+    }
+
+
+    /**
+     *  Query the database and get the lessons available for the...
+     *  ...day
+     *  @param currentDayName is the day of the week
+     */
+    @ExperimentalCoroutinesApi
+    private fun getCurrentDayLessons(currentDayName: String) {
+        viewModel.getLessonsForCurrentDay(currentDayName)
+        observeCurrentDayLessons()
+    }
+
+    private fun observeCurrentDayLessons() {
+        viewModel.currentDayLessons.observe(viewLifecycleOwner, {
+            if (it.isNotEmpty()) {
+                val text = getString(R.string.class_in, it[0].courseTitle, it[0].startTime)
+                binding.classInTextView.text = text
+                adapter.submitList(it)
+                showAndHideViewsWhenLessonListIsNotEmpty()
+            } else {
+                hideAndShowViewsWhenLessonListIsNotEmpty()
+            }
+        })
+    }
 
     private fun getDayOfTheWeek(): String {
         return SimpleDateFormat(CURRENT_DAY_FORMAT, Locale.getDefault()).format(Date())
     }
 
     private fun setupRecyclerView() {
-
         val manager = LinearLayoutManager(context)
-        val lessons = arrayListOf<Lesson>()
 
         if (!::adapter.isInitialized) {
             adapter = DayEventsAdapter()
         }
-
-        binding.todayLessonsRecyclerView.adapter = adapter
-        binding.todayLessonsRecyclerView.layoutManager = manager
-        binding.todayLessonsRecyclerView.addItemDecoration(
-            MarginItemDecoration(
-                resources.getDimension(R.dimen.dp_8).toInt()
+        binding.apply {
+            todayLessonsRecyclerView.adapter = adapter
+            todayLessonsRecyclerView.layoutManager = manager
+            todayLessonsRecyclerView.isNestedScrollingEnabled = false
+            todayLessonsRecyclerView.addItemDecoration(
+                MarginItemDecoration(
+                    resources.getDimension(R.dimen.dp_8).toInt()
+                )
             )
-        )
-        adapter.submitList(lessons)
-
+        }
         adapter.setOnClickListener(object : OnLessonClickListener {
             override fun onItemClick(lesson: Lesson) {
                 //Item Clicked
             }
         })
+    }
+
+    /**
+     * Show the RecyclerView and hide the emptyStateView when the...
+     * ...List of lessons available for the day is not empty
+     */
+    private fun showAndHideViewsWhenLessonListIsNotEmpty() {
+        binding.apply {
+            todayLessonsRecyclerView.show()
+            emptyStateText.hide()
+        }
+    }
+
+    /**
+     * Hide the RecyclerView and hide the emptyStateView when the...
+     * ...List of lessons available for the day is  empty
+     */
+    private fun hideAndShowViewsWhenLessonListIsNotEmpty() {
+        binding.apply {
+            todayLessonsRecyclerView.hide()
+            emptyStateText.show()
+        }
     }
 
 }

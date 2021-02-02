@@ -9,7 +9,7 @@
         android:fillViewport="true"
         tools:context=".HomeFragment">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
@@ -26,6 +26,7 @@
                     android:clipToPadding="true"
                     app:cardCornerRadius="@dimen/dp_10"
                     app:cardElevation="@dimen/dp_14"
+                    android:id="@+id/defaultWelcomeCard"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -41,6 +42,7 @@
                             android:layout_width="@dimen/dp_80"
                             android:layout_height="@dimen/dp_80"
                             android:layout_marginStart="@dimen/dp_8"
+                            android:contentDescription="@string/a_lady_avatar_img_desc"
                             android:scaleType="centerCrop"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -138,19 +140,37 @@
                         android:textStyle="normal" />
                 </FrameLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/todayLessonsRecyclerView"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_20"
-                    android:layoutAnimation="@anim/layout_animation"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    tools:listitem="@layout/item_day_events" />
+                    android:layout_height="wrap_content">
 
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/todayLessonsRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dp_20"
+                        android:layoutAnimation="@anim/layout_animation"
+                        android:overScrollMode="never"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        tools:listitem="@layout/item_day_events" />
+
+                    <TextView
+                        android:id="@+id/emptyStateText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dp_20"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="@string/no_lesson"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="@dimen/sp_18"
+                        android:visibility="gone" />
+                </FrameLayout>
             </LinearLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnCreateNewLesson"
