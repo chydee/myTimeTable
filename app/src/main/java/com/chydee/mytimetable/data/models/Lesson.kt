@@ -3,10 +3,10 @@ package com.chydee.mytimetable.data.models
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.chydee.mytimetable.utils.Constants
+import com.chydee.mytimetable.utils.PERIOD_TABLE_NAME
 
-@Entity(tableName = Constants.PERIOD_TABLE_NAME)
-data class Period(
+@Entity(tableName = PERIOD_TABLE_NAME)
+data class Lesson(
     @PrimaryKey(autoGenerate = true) val id: Int?,
     @ColumnInfo(name = "course_code") val courseCode: String,
     @ColumnInfo(name = "course_title") val courseTitle: String,

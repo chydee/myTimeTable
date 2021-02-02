@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.chydee.mytimetable.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/home_fragment" />
+    <fragment
+        android:id="@+id/newLessonFragment"
+        android:name="com.chydee.mytimetable.NewLessonFragment"
+        android:label="fragment_new_lesson"
+        tools:layout="@layout/fragment_new_lesson" />
+    <fragment
+        android:id="@+id/lessonDetailsFragment"
+        android:name="com.chydee.mytimetable.LessonDetailsFragment"
+        android:label="fragment_lesson_details"
+        tools:layout="@layout/fragment_lesson_details" />
+</navigation>

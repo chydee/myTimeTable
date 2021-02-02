@@ -3,7 +3,7 @@ package com.chydee.mytimetable.di
 import android.content.Context
 import androidx.room.Room
 import com.chydee.mytimetable.data.MyTimetableDB
-import com.chydee.mytimetable.data.dao.PeriodDao
+import com.chydee.mytimetable.data.dao.LessonDao
 import com.chydee.mytimetable.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -28,5 +28,5 @@ object DatabaseModule {
         .build()
 
     @Provides
-    fun providePeriodDao(database: MyTimetableDB): PeriodDao = database.periodDao
+    fun providePeriodDao(database: MyTimetableDB): LessonDao = database.lessonDao
 }

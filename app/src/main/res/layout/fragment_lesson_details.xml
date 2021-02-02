@@ -117,7 +117,7 @@
         android:layout_marginStart="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_16"
         android:fontFamily="@font/poppins"
-        android:text="CSC111"
+        tools:text="CSC111"
         android:textColor="@color/secondaryTextColor"
         app:backgroundTint="@color/primaryTextColor"
         app:cornerRadius="@dimen/dp_10"

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.chydee.mytimetable.data.models.Period
+import com.chydee.mytimetable.data.models.Lesson
 import com.chydee.mytimetable.databinding.ItemDayEventsBinding
 
 class DayEventsAdapter : RecyclerView.Adapter<DayEventsViewHolder>() {
@@ -13,19 +13,19 @@ class DayEventsAdapter : RecyclerView.Adapter<DayEventsViewHolder>() {
     private lateinit var listener: OnPeriodClickListener
 
 
-    private val diffCallback = object : DiffUtil.ItemCallback<Period>() {
-        override fun areItemsTheSame(oldItem: Period, newItem: Period): Boolean {
+    private val diffCallback = object : DiffUtil.ItemCallback<Lesson>() {
+        override fun areItemsTheSame(oldItem: Lesson, newItem: Lesson): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Period, newItem: Period): Boolean {
+        override fun areContentsTheSame(oldItem: Lesson, newItem: Lesson): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)
 
-    fun submitList(list: List<Period>) = differ.submitList(list)
+    fun submitList(list: List<Lesson>) = differ.submitList(list)
 
     fun setOnClickListener(listener: OnPeriodClickListener) {
         this.listener = listener
@@ -45,7 +45,7 @@ class DayEventsAdapter : RecyclerView.Adapter<DayEventsViewHolder>() {
         val item = differ.currentList[position]
         holder.bind(item)
         holder.itemView.setOnClickListener {
-            listener.onItemClick(period = item)
+            listener.onItemClick(lesson = item)
         }
 
     }
