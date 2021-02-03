@@ -1,6 +1,11 @@
 @file:JvmName("Constants")
 
 package com.chydee.mytimetable.utils
+
+import com.chydee.mytimetable.data.models.Color
+import android.graphics.Color as Colors
+
+
 // Notification Channel constants
 
 // Name of Notification Channel for verbose notifications of background work
@@ -21,3 +26,17 @@ const val PERIOD_TABLE_NAME = "period"
 
 
 const val CURRENT_DAY_FORMAT = "EEEE"
+
+
+val colors = arrayListOf(
+    Color("Blue", Colors.BLUE),
+    Color("Yellow", Colors.YELLOW),
+    Color("Green", Colors.GREEN),
+    Color("Red", Colors.RED),
+    Color("Magenta", Colors.MAGENTA),
+    Color("Black", Colors.BLACK),
+    Color("Dark-Gray", Colors.DKGRAY),
+    Color("Cyan", Colors.CYAN),
+    Color("Gray", Colors.GRAY),
+    Color("Light-Gray", Colors.LTGRAY)
+)

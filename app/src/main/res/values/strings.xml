@@ -13,9 +13,10 @@
     <!-- Label -->
 
     <!-- Hints -->
-    <string name="lesson_title_hint">Title…</string>
+    <string name="lesson_title_hint">Course Title…</string>
+    <string name="lesson_code_hint">Course Code…</string>
     <string name="place_hint">Place</string>
-    <string name="teacher_hint">Teacher…</string>
+    <string name="teacher_hint">Teacher or Lecturer…</string>
     <string name="description_hint">Description…</string>
     <!-- Hints -->
 
@@ -36,5 +37,9 @@
     <string name="lesson_duration">%s - %s</string>
     <string name="a_lady_avatar_img_desc">A Lady Avatar</string>
     <string name="no_lesson">You have no class for today 🙂</string>
+    <string name="batch_mode_details">When enabled using the save button won\'t exit this screen, allowing you to create add more lessons to a table</string>
+    <string name="batch_mode_switch_label">Batch mode</string>
+    <string name="default_time">00:00</string>
+    <string name="day_hint_text">Day</string>
     <!--Home-->
 </resources>

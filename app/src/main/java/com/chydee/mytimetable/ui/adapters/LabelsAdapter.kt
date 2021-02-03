@@ -1,11 +1,11 @@
 package com.chydee.mytimetable.ui.adapters
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.chydee.mytimetable.data.models.Color
 import com.chydee.mytimetable.databinding.ItemLabelsBinding
 
 class LabelsAdapter : RecyclerView.Adapter<LabelsAdapter.MyViewHolder>() {
@@ -39,10 +39,10 @@ class LabelsAdapter : RecyclerView.Adapter<LabelsAdapter.MyViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(color: Color) {
             with(binding) {
-                /*colorCard.setOnClickListener {
-                    listener.onColorSelected(color)
+                labelCard.setOnClickListener {
+                    listener.onLabelClicked(color)
                 }
-                colorCard.setCardBackgroundColor(color.colorRes)*/
+                labelCard.setCardBackgroundColor(color.colorRes)
                 executePendingBindings()
             }
         }
