@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutDescription="@xml/activity_launcher_scene"
-        tools:context=".ui.LauncherActivity">
+        tools:context=".ui.launcher.LauncherActivity">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/logo"

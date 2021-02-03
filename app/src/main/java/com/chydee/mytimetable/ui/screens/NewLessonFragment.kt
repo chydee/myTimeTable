@@ -1,4 +1,4 @@
-package com.chydee.mytimetable
+package com.chydee.mytimetable.ui.screens
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chydee.mytimetable.data.models.Color
 import com.chydee.mytimetable.databinding.FragmentNewLessonBinding
 import com.chydee.mytimetable.ui.adapters.LabelsAdapter
+import com.chydee.mytimetable.ui.viewmodel.MainViewModel
 import com.chydee.mytimetable.utils.autoCleared
 import com.chydee.mytimetable.utils.colors
 import dagger.hilt.android.AndroidEntryPoint

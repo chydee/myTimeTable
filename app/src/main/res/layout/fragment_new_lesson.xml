@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:statusBarBackground="@android:color/transparent"
-        tools:context=".NewLessonFragment">
+        tools:context=".ui.screens.NewLessonFragment">
 
         <ImageView
             android:id="@+id/createNewLessonIllustration"

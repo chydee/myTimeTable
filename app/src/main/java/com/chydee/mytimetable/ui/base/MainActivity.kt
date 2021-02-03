@@ -1,7 +1,8 @@
-package com.chydee.mytimetable
+package com.chydee.mytimetable.ui.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.chydee.mytimetable.R
 import com.chydee.mytimetable.utils.setStatusBarColor
 import dagger.hilt.android.AndroidEntryPoint
 

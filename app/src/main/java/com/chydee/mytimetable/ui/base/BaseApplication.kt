@@ -1,4 +1,4 @@
-package com.chydee.mytimetable
+package com.chydee.mytimetable.ui.base
 
 import android.app.Application
 import androidx.databinding.library.BuildConfig

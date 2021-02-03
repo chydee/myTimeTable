@@ -1,4 +1,4 @@
-package com.chydee.mytimetable
+package com.chydee.mytimetable.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

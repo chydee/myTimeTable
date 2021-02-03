@@ -1,4 +1,4 @@
-package com.chydee.mytimetable
+package com.chydee.mytimetable.ui.screens
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.chydee.mytimetable.R
 import com.chydee.mytimetable.data.models.Lesson
 import com.chydee.mytimetable.databinding.HomeFragmentBinding
 import com.chydee.mytimetable.ui.adapters.DayEventsAdapter
 import com.chydee.mytimetable.ui.adapters.OnLessonClickListener
+import com.chydee.mytimetable.ui.viewmodel.MainViewModel
 import com.chydee.mytimetable.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
