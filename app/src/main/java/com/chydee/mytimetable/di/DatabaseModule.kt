@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.chydee.mytimetable.data.MyTimetableDB
 import com.chydee.mytimetable.data.dao.LessonDao
+import com.chydee.mytimetable.data.dao.TimetableDao
 import com.chydee.mytimetable.utils.TEST_DB_NAME
 import dagger.Module
 import dagger.Provides
@@ -28,5 +29,8 @@ object DatabaseModule {
         .build()
 
     @Provides
-    fun providePeriodDao(database: MyTimetableDB): LessonDao = database.lessonDao
+    fun provideLessonDao(database: MyTimetableDB): LessonDao = database.lessonDao
+
+    @Provides
+    fun provideTimetableDao(database: MyTimetableDB): TimetableDao = database.timetableDao
 }

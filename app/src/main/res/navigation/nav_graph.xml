@@ -9,7 +9,28 @@
         android:id="@+id/homeFragment"
         android:name="com.chydee.mytimetable.ui.screens.HomeFragment"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment">
+        <action
+            android:id="@+id/action_homeFragment_to_lessonDetailsFragment"
+            app:destination="@id/lessonDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="false"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_homeFragment_to_newTimetableFragment"
+            app:destination="@id/newTimetableFragment"
+            app:enterAnim="@anim/slide_in_down"
+            app:exitAnim="@anim/slide_out_up"
+            app:launchSingleTop="false"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
         android:id="@+id/newLessonFragment"
         android:name="com.chydee.mytimetable.ui.screens.NewLessonFragment"
@@ -20,4 +41,20 @@
         android:name="com.chydee.mytimetable.ui.screens.LessonDetailsFragment"
         android:label="fragment_lesson_details"
         tools:layout="@layout/fragment_lesson_details" />
+    <fragment
+        android:id="@+id/newTimetableFragment"
+        android:name="com.chydee.mytimetable.ui.screens.NewTimetableFragment"
+        android:label="NewTimetableFragment"
+        tools:layout="@layout/fragment_new_timetable">
+        <action
+            android:id="@+id/action_newTimetableFragment_to_newLessonFragment"
+            app:destination="@id/newLessonFragment"
+            app:enterAnim="@anim/slide_in_down"
+            app:exitAnim="@anim/slide_out_up"
+            app:launchSingleTop="false"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@id/newTimetableFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
 </navigation>

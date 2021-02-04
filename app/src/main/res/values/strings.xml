@@ -41,5 +41,10 @@
     <string name="batch_mode_switch_label">Batch mode</string>
     <string name="default_time">00:00</string>
     <string name="day_hint_text">Day</string>
+    <string name="subject_illustration_image_desc">Subject Illustration Image</string>
+    <string name="new_timetable_text_label">New Timetable</string>
+    <string name="timetable_name_label">Timetable Name</string>
+    <string name="timetable_name_hint">Timetable For...</string>
+    <string name="btn_continue_text">Continue</string>
     <!--Home-->
 </resources>

@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chydee.mytimetable.R
 import com.chydee.mytimetable.data.models.Lesson
@@ -33,6 +36,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = HomeFragmentBinding.inflate(inflater)
+        insetView()
         return binding.root
     }
 
@@ -41,7 +45,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         setupRecyclerView()
-        getCurrentDayLessons(getDayOfTheWeek())
+        // getCurrentDayLessons(getDayOfTheWeek())
+        handleClickEvents()
     }
 
     private fun handleClickEvents() {
@@ -50,7 +55,23 @@ class HomeFragment : Fragment() {
         }
 
         binding.textBtnClickToSeeDetails.setOnClickListener {
+        }
 
+        binding.btnCreateNewTimetable.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewTimetableFragment())
+        }
+
+        binding.btnSeeAll.setOnClickListener {
+
+        }
+    }
+
+    private fun insetView() {
+        requireActivity().makeStatusBarTransparent()
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root.findViewById(R.id.homeContentContainer)) { _, insets ->
+            binding.root.findViewById<LinearLayout>(R.id.homeLayoutGroup)
+                .setMarginTop(insets.systemWindowInsetTop)
+            insets.consumeSystemWindowInsets()
         }
     }
 

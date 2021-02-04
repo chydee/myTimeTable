@@ -21,17 +21,18 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <ImageView
+                android:id="@+id/courseIllustration"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/black"
-                android:fontFamily="@font/poppins_bold"
+                android:background="@color/browser_actions_bg_grey"
+                android:contentDescription="@string/subject_illustration_image_desc"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="@{lesson.courseCode}"
-                android:textAlignment="gravity"
-                android:textColor="@color/primaryTextColor"
-                android:textSize="@dimen/sp_18" />
+                android:maxHeight="100dp"
+                android:padding="@dimen/dp_8"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic__05_archive" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"

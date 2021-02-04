@@ -8,6 +8,7 @@ class DayEventsViewHolder(private var binding: ItemDayEventsBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(lesson: Lesson) {
         binding.lesson = lesson
+        binding.courseIllustration.setImageResource(lesson.illusID)
         binding.executePendingBindings()
     }
 }

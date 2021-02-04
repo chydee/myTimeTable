@@ -3,9 +3,9 @@ package com.chydee.mytimetable.data.models
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.chydee.mytimetable.utils.PERIOD_TABLE_NAME
+import com.chydee.mytimetable.utils.LESSON_TABLE_NAME
 
-@Entity(tableName = PERIOD_TABLE_NAME)
+@Entity(tableName = LESSON_TABLE_NAME)
 data class Lesson(
     @PrimaryKey(autoGenerate = true) val id: Int?,
     @ColumnInfo(name = "course_code") val courseCode: String,
@@ -16,4 +16,5 @@ data class Lesson(
     @ColumnInfo(name = "day_of_week") val dayOfWeek: String,
     @ColumnInfo(name = "start_time") val startTime: String,
     @ColumnInfo(name = "end_time") val endTime: String,
+    @ColumnInfo(name = "lesson_illustration") val illusID: Int
 )

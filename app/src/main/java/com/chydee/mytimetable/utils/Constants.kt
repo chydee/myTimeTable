@@ -22,7 +22,8 @@ const val NOTIFICATION_ID = 1
 const val DB_NAME = "myTimeTable_DB"
 const val TEST_DB_NAME = "test_db_name"
 
-const val PERIOD_TABLE_NAME = "period"
+const val LESSON_TABLE_NAME = "period"
+const val TIMETABLE_TABLE_NAME = "timetable"
 
 
 const val CURRENT_DAY_FORMAT = "EEEE"

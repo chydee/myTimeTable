@@ -4,76 +4,75 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
 import com.chydee.mytimetable.R
-import com.chydee.mytimetable.data.models.Color
-import com.chydee.mytimetable.databinding.FragmentNewLessonBinding
-import com.chydee.mytimetable.ui.adapters.LabelsAdapter
+import com.chydee.mytimetable.databinding.FragmentNewTimetableBinding
 import com.chydee.mytimetable.ui.viewmodel.MainViewModel
 import com.chydee.mytimetable.utils.autoCleared
-import com.chydee.mytimetable.utils.colors
 import com.chydee.mytimetable.utils.makeStatusBarTransparent
 import com.chydee.mytimetable.utils.setMarginTop
+import com.chydee.mytimetable.utils.takeText
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
-class NewLessonFragment : Fragment() {
+class NewTimetableFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModels()
-    private var binding: FragmentNewLessonBinding by autoCleared()
 
-    private lateinit var labelsAdapter: LabelsAdapter
+    private var binding: FragmentNewTimetableBinding by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentNewLessonBinding.inflate(inflater)
+        binding = FragmentNewTimetableBinding.inflate(inflater)
         insetView()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = this
+        handleOnClickEvents()
     }
 
-    private fun loadAndSetupLabelList() {
-        val layoutManager = LinearLayoutManager(requireContext())
-
-        binding.labelsRecyclerView.layoutManager = layoutManager
-
-        labelsAdapter = LabelsAdapter()
-
-        with(binding) {
-            labelsRecyclerView.adapter = labelsAdapter
-            labelsAdapter.submitList(colors)
-            labelsRecyclerView.setHasFixedSize(true)
-            labelsRecyclerView.isNestedScrollingEnabled = false
+    /**
+     *  Listen and Handle click events
+     */
+    private fun handleOnClickEvents() {
+        binding.btnContinue.setOnClickListener {
+            findNavController().navigate(NewTimetableFragmentDirections.actionNewTimetableFragmentToNewLessonFragment())
+            // validateAndContinue()
         }
+        binding.btnUp.setOnClickListener { findNavController().popBackStack() }
+    }
 
-        labelsAdapter.setOnLabelClickListener(object : LabelsAdapter.OnItemClickListener {
-            override fun onLabelClicked(color: Color) {
-                TODO("Not yet implemented")
-            }
-        })
+    private fun validateAndContinue() {
+        val name = binding.timetableNameInput.takeText()
 
+        if (name.isEmpty()) {
+            binding.timetableNameTextInputLayout.error = "Timetable name is empty"
+        } else {
+            saveTimetableName()
+        }
+    }
+
+    private fun saveTimetableName() {
+        Toast.makeText(context, "Saving...", Toast.LENGTH_SHORT).show()
     }
 
     private fun insetView() {
         requireActivity().makeStatusBarTransparent()
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root.findViewById(R.id.content_container)) { _, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root.findViewById(R.id.newTableScreen)) { _, insets ->
             binding.root.findViewById<MaterialButton>(R.id.btnUp)
                 .setMarginTop(insets.systemWindowInsetTop)
             insets.consumeSystemWindowInsets()
         }
     }
-
 
 }
