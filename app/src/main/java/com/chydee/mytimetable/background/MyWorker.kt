@@ -30,13 +30,17 @@ class MyWorker @WorkerInject constructor(
         val appContext = applicationContext
 
         return try {
-            showNotificationSomeMinutesToClass(appContext)
-            notifyMeOfClassesForTheDay(appContext)
-            //Return if successful
-            Result.success()
-        } catch (throwable: Throwable) {
-            //Throw exception if anything goes wrong
-            Timber.e(throwable)
+            try {
+                showNotificationSomeMinutesToClass(appContext)
+                notifyMeOfClassesForTheDay(appContext)
+                //Return if successful
+                Result.success()
+            } catch (throwable: Throwable) {
+                //Throw exception if anything goes wrong
+                Timber.e(throwable)
+                Result.failure()
+            }
+        } catch (e: Exception) {
             Result.failure()
         }
     }

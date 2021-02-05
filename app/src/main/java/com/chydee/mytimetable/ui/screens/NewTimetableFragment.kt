@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.chydee.mytimetable.R
+import com.chydee.mytimetable.data.models.Timetable
 import com.chydee.mytimetable.databinding.FragmentNewTimetableBinding
 import com.chydee.mytimetable.ui.viewmodel.MainViewModel
 import com.chydee.mytimetable.utils.autoCleared
@@ -46,26 +47,46 @@ class NewTimetableFragment : Fragment() {
      */
     private fun handleOnClickEvents() {
         binding.btnContinue.setOnClickListener {
-            findNavController().navigate(NewTimetableFragmentDirections.actionNewTimetableFragmentToNewLessonFragment())
-            // validateAndContinue()
+            validateAndContinue()
         }
         binding.btnUp.setOnClickListener { findNavController().popBackStack() }
     }
 
+    /**
+     *  Validate by verify that the name field is not empty and then continue
+     */
     private fun validateAndContinue() {
         val name = binding.timetableNameInput.takeText()
 
         if (name.isEmpty()) {
             binding.timetableNameTextInputLayout.error = "Timetable name is empty"
         } else {
-            saveTimetableName()
+            saveTimetableName(name)
         }
     }
 
-    private fun saveTimetableName() {
-        Toast.makeText(context, "Saving...", Toast.LENGTH_SHORT).show()
+    /**
+     *  Save Timetable to database
+     */
+    private fun saveTimetableName(tableName: String) {
+        val timetable = Timetable(tableName = tableName)
+        viewModel.saveTimetableInfo(timetable)
+        observePropertyTimetable()
     }
 
+    private fun observePropertyTimetable() {
+        viewModel.timetableName.observe(viewLifecycleOwner, {
+            if (it.isNotBlank()) {
+                findNavController().navigate(NewTimetableFragmentDirections.actionNewTimetableFragmentToNewLessonFragment())
+            } else {
+                Toast.makeText(context, "Error creating Timetable", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    /**
+     *  Inset the top view-group item so it doesn't go all the way up
+     */
     private fun insetView() {
         requireActivity().makeStatusBarTransparent()
         ViewCompat.setOnApplyWindowInsetsListener(binding.root.findViewById(R.id.newTableScreen)) { _, insets ->

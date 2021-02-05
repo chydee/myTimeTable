@@ -15,9 +15,11 @@ interface DBHelper {
 
     suspend fun deleteAll()
 
-    suspend fun getAllLessons(): Flow<List<Lesson>>
+    suspend fun deleteAllTimetableContents(tableName: String)
 
-    suspend fun getTodayLesson(today: String): Flow<List<Lesson>>
+    suspend fun getAllLessons(tableName: String): Flow<List<Lesson>>
+
+    suspend fun getTodayLesson(today: String, tableName: String): Flow<List<Lesson>>
 
     suspend fun insert(timetable: Timetable)
 

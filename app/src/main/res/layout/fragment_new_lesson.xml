@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="model"
+            type="com.chydee.mytimetable.ui.viewmodel.MainViewModel" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/content_container"
         android:layout_width="match_parent"
@@ -336,6 +343,7 @@
             android:layout_marginStart="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_16"
             android:fontFamily="@font/poppins"
+            android:text="@{model.timetableName}"
             android:textColor="@color/secondaryTextColor"
             app:backgroundTint="@color/primaryTextColor"
             app:cornerRadius="@dimen/dp_10"
@@ -344,16 +352,17 @@
             tools:text="CSC111" />
 
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnEditLesson"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveLesson"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
+            android:layout_gravity="top|end"
             android:layout_margin="@dimen/dp_16"
             android:contentDescription="@string/edit_lesson_fab_desc"
-            app:backgroundTint="@color/black"
+            android:text="@string/btn_save_text"
+            android:textColor="@color/black"
+            app:backgroundTint="@color/primaryLightColor"
             app:elevation="@dimen/dp_14"
-            app:srcCompat="@drawable/ic_baseline_check"
-            app:tint="@color/primaryTextColor" />
+            app:srcCompat="@drawable/ic_baseline_check" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -46,21 +46,31 @@ interface LessonDao {
     fun deleteAll()
 
 
+    @Query("DELETE FROM $LESSON_TABLE_NAME WHERE timetable_name LIKE :tableName")
+    fun deleteTimetableContents(tableName: String)
+
+
     /**
      * Get all periods from period_table
      *
      */
-    @Query("SELECT * FROM $LESSON_TABLE_NAME ORDER BY id DESC")
-    fun getAllLessons(): Flow<List<Lesson>>
+    @Query("SELECT * FROM $LESSON_TABLE_NAME WHERE timetable_name LIKE :tableName ORDER BY id DESC")
+    fun getAllLessons(tableName: String): Flow<List<Lesson>>
 
-    @Query("SELECT * FROM $LESSON_TABLE_NAME WHERE day_of_week LIKE :today")
-    fun getTodayLesson(today: String): Flow<List<Lesson>>
+    /**
+     *  Get current day's lessons where Timetable name is equal to...
+     *  ...@param tableName and ...
+     *  ... Current day of the week is equal to...
+     *  ... @param today
+     */
+    @Query("SELECT * FROM $LESSON_TABLE_NAME WHERE timetable_name LIKE :tableName AND  day_of_week LIKE :today")
+    fun getTodayLessons(today: String, tableName: String): Flow<List<Lesson>>
 
-    @Query("SELECT * FROM $LESSON_TABLE_NAME WHERE day_of_week LIKE :today")
-    fun getTodayLessons(today: String): List<Lesson>
+    @Query("SELECT * FROM $LESSON_TABLE_NAME WHERE timetable_name LIKE :tableName AND day_of_week LIKE :today")
+    fun getTodayClasses(today: String, tableName: String): List<Lesson>
 
     @ExperimentalCoroutinesApi
-    fun getTodayLessonDistinctUntilChanged(today: String) =
-        getTodayLesson(today).distinctUntilChanged()
+    fun getTodayLessonDistinctUntilChanged(today: String, tableName: String) =
+        getTodayLessons(today, tableName).distinctUntilChanged()
 
 }

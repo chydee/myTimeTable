@@ -45,13 +45,17 @@ class DBHelperImpl @Inject constructor(
         lessonDao.deleteAll()
     }
 
-    override suspend fun getAllLessons(): Flow<List<Lesson>> {
-        return lessonDao.getAllLessons()
+    override suspend fun deleteAllTimetableContents(tableName: String) {
+        lessonDao.deleteTimetableContents(tableName)
+    }
+
+    override suspend fun getAllLessons(tableName: String): Flow<List<Lesson>> {
+        return lessonDao.getAllLessons(tableName)
     }
 
     @ExperimentalCoroutinesApi
-    override suspend fun getTodayLesson(today: String): Flow<List<Lesson>> {
-        return lessonDao.getTodayLessonDistinctUntilChanged(today)
+    override suspend fun getTodayLesson(today: String, tableName: String): Flow<List<Lesson>> {
+        return lessonDao.getTodayLessonDistinctUntilChanged(today, tableName)
     }
 
     override suspend fun deleteAllTimetable() {

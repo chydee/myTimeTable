@@ -46,5 +46,17 @@
     <string name="timetable_name_label">Timetable Name</string>
     <string name="timetable_name_hint">Timetable For...</string>
     <string name="btn_continue_text">Continue</string>
+    <string name="btn_save_text">Save</string>
     <!--Home-->
+
+    <!--Error messages-->
+    <string name="code_input_error">Course code cannot be empty</string>
+    <string name="title_input_error">Course title is required</string>
+    <string name="description_input_error">Description is required</string>
+    <string name="teacher_input_error">Teacher or Lecturer name is required</string>
+    <string name="place_input_error">Place is required</string>
+    <string name="day_input_error">Day is required</string>
+    <string name="from_input_error">Start time is required</string>
+    <string name="to_input_error">End time is required</string>
+    <!--Error messages-->
 </resources>

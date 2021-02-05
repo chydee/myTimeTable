@@ -7,6 +7,6 @@ import com.chydee.mytimetable.utils.TIMETABLE_TABLE_NAME
 
 @Entity(tableName = TIMETABLE_TABLE_NAME)
 data class Timetable(
-    @PrimaryKey(autoGenerate = true) val id: Int?,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo(name = "timetable_name") val tableName: String,
 )

@@ -13,10 +13,7 @@ import com.chydee.mytimetable.data.models.Color
 import com.chydee.mytimetable.databinding.FragmentNewLessonBinding
 import com.chydee.mytimetable.ui.adapters.LabelsAdapter
 import com.chydee.mytimetable.ui.viewmodel.MainViewModel
-import com.chydee.mytimetable.utils.autoCleared
-import com.chydee.mytimetable.utils.colors
-import com.chydee.mytimetable.utils.makeStatusBarTransparent
-import com.chydee.mytimetable.utils.setMarginTop
+import com.chydee.mytimetable.utils.*
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -66,6 +63,37 @@ class NewLessonFragment : Fragment() {
 
     }
 
+    private fun isValidated(): Boolean {
+        if (binding.codeInput.takeText().isEmpty()) {
+            binding.codeTextInputLayout.error = getString(R.string.code_input_error)
+            return false
+        }
+        if (binding.titleInput.takeText().isEmpty()) {
+            binding.titleTextInputLayout.error = getString(R.string.title_input_error)
+            return false
+        }
+
+        if (binding.dayInput.takeText().isEmpty()) {
+            binding.dayTextInputLayout.error = getString(R.string.day_input_error)
+            return false
+        }
+
+        if (binding.fromInput.takeText().isEmpty()) {
+            binding.fromTextInputLayout.error = getString(R.string.from_input_error)
+            return false
+        }
+
+        if (binding.toInput.takeText().isEmpty()) {
+            binding.toTextInputLayout.error = getString(R.string.to_input_error)
+            return false
+        }
+
+        return true
+    }
+
+    /**
+     *  Inset the top view-group item so it doesn't go all the way up
+     */
     private fun insetView() {
         requireActivity().makeStatusBarTransparent()
         ViewCompat.setOnApplyWindowInsetsListener(binding.root.findViewById(R.id.content_container)) { _, insets ->
