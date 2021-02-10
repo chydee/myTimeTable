@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">myTimeTable</string>
     <string name="versionCode">v-1.0.0</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open_drawer">Open drawer</string>
+    <string name="close_drawer">Close drawer</string>
     <string name="new_lesson_illustration_desc">An Image Showing aa Tutor standing at the board and some students sitting and listening</string>
 
 
@@ -58,5 +58,23 @@
     <string name="day_input_error">Day is required</string>
     <string name="from_input_error">Start time is required</string>
     <string name="to_input_error">End time is required</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_menu_item">Home</string>
+    <string name="my_timetables_menu_item">My Timetables</string>
     <!--Error messages-->
 </resources>

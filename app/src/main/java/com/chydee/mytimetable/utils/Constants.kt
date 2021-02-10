@@ -3,6 +3,8 @@
 package com.chydee.mytimetable.utils
 
 import com.chydee.mytimetable.data.models.Color
+import java.text.SimpleDateFormat
+import java.util.*
 import android.graphics.Color as Colors
 
 
@@ -41,3 +43,7 @@ val colors = arrayListOf(
     Color("Gray", Colors.GRAY),
     Color("Light-Gray", Colors.LTGRAY)
 )
+
+fun getDayOfTheWeek(): String {
+    return SimpleDateFormat(CURRENT_DAY_FORMAT, Locale.getDefault()).format(Date())
+}

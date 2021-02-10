@@ -12,11 +12,15 @@ import androidx.navigation.fragment.findNavController
 import com.chydee.mytimetable.R
 import com.chydee.mytimetable.data.models.Timetable
 import com.chydee.mytimetable.databinding.FragmentNewTimetableBinding
+import com.chydee.mytimetable.ui.adapters.DivLikeAdapter
 import com.chydee.mytimetable.ui.viewmodel.MainViewModel
 import com.chydee.mytimetable.utils.autoCleared
 import com.chydee.mytimetable.utils.makeStatusBarTransparent
 import com.chydee.mytimetable.utils.setMarginTop
 import com.chydee.mytimetable.utils.takeText
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,6 +44,7 @@ class NewTimetableFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         handleOnClickEvents()
+        setupTagList()
     }
 
     /**
@@ -94,6 +99,28 @@ class NewTimetableFragment : Fragment() {
                 .setMarginTop(insets.systemWindowInsetTop)
             insets.consumeSystemWindowInsets()
         }
+    }
+
+    /**
+     * set up timetable tags list
+     */
+    private fun setupTagList() {
+        val recyclerView = binding.timetableTagsRecyclerView
+        val layoutManager = FlexboxLayoutManager(requireContext())
+        layoutManager.flexDirection = FlexDirection.ROW
+        layoutManager.justifyContent = JustifyContent.CENTER
+        recyclerView.layoutManager = layoutManager
+
+        val divLikeContent = ArrayList<String>()
+        divLikeContent.add("Route")
+        divLikeContent.add("No calls during the ride")
+        divLikeContent.add("Smell")
+        divLikeContent.add("Less talk")
+        divLikeContent.add("Safety")
+
+        val adapter = DivLikeAdapter(divLikeContent)
+
+        recyclerView.adapter = adapter
     }
 
 }

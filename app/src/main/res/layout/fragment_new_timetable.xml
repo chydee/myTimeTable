@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/newTableScreen"
         android:layout_width="match_parent"
@@ -73,6 +72,18 @@
                         android:textSize="@dimen/sp_14" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/timetableTagsRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintEnd_toEndOf="@+id/timetableNameTextInputLayout"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/timetableNameTextInputLayout"
+                    app:layout_constraintTop_toBottomOf="@id/timetableNameTextInputLayout"
+                    tools:listitem="@layout/item_timetable_tag" />
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnContinue"
                     android:layout_width="0dp"
@@ -84,7 +95,7 @@
                     app:cornerRadius="@dimen/dp_16"
                     app:layout_constraintEnd_toEndOf="@+id/timetableNameTextInputLayout"
                     app:layout_constraintStart_toStartOf="@+id/timetableNameTextInputLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/timetableNameTextInputLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/timetableTagsRecyclerView" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

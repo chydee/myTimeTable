@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.chydee.mytimetable.ui.screens.HomeFragment"
-        android:label="home_fragment"
-        tools:layout="@layout/home_fragment">
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_lessonDetailsFragment"
             app:destination="@id/lessonDetailsFragment"
@@ -34,17 +34,17 @@
     <fragment
         android:id="@+id/newLessonFragment"
         android:name="com.chydee.mytimetable.ui.screens.NewLessonFragment"
-        android:label="fragment_new_lesson"
+        android:label="New Lesson"
         tools:layout="@layout/fragment_new_lesson" />
     <fragment
         android:id="@+id/lessonDetailsFragment"
         android:name="com.chydee.mytimetable.ui.screens.LessonDetailsFragment"
-        android:label="fragment_lesson_details"
+        android:label="Lesson Details"
         tools:layout="@layout/fragment_lesson_details" />
     <fragment
         android:id="@+id/newTimetableFragment"
         android:name="com.chydee.mytimetable.ui.screens.NewTimetableFragment"
-        android:label="NewTimetableFragment"
+        android:label="New Timetable"
         tools:layout="@layout/fragment_new_timetable">
         <action
             android:id="@+id/action_newTimetableFragment_to_newLessonFragment"
@@ -57,4 +57,43 @@
             app:popUpTo="@id/newTimetableFragment"
             app:popUpToInclusive="false" />
     </fragment>
+    <fragment
+        android:id="@+id/timetablesFragment"
+        android:name="com.chydee.mytimetable.ui.screens.TimetablesFragment"
+        android:label="TimetablesFragment"
+        tools:layout="@layout/fragment_timetables" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.chydee.mytimetable.ui.preferences.SettingsFragment"
+        android:label="Settings" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.chydee.mytimetable.ui.preferences.AboutFragment"
+        android:label="About" />
+    <action
+        android:id="@+id/action_global_aboutFragment"
+        app:destination="@id/aboutFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+    <action
+        android:id="@+id/action_global_timetablesFragment"
+        app:destination="@id/timetablesFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+    <action
+        android:id="@+id/action_global_settingsFragment"
+        app:destination="@id/settingsFragment"
+        app:enterAnim="@anim/slide_out_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+    <fragment
+        android:id="@+id/tableFragment"
+        android:name="com.chydee.mytimetable.ui.screens.TableFragment"
+        android:label="Timetable"
+        tools:layout="@layout/fragment_table" />
 </navigation>

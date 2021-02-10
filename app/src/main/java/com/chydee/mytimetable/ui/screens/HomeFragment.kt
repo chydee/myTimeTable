@@ -5,37 +5,45 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chydee.mytimetable.R
 import com.chydee.mytimetable.data.models.Lesson
-import com.chydee.mytimetable.databinding.HomeFragmentBinding
+import com.chydee.mytimetable.data.preference.PreferenceStorage
+import com.chydee.mytimetable.databinding.FragmentHomeBinding
 import com.chydee.mytimetable.ui.adapters.DayEventsAdapter
 import com.chydee.mytimetable.ui.adapters.OnLessonClickListener
 import com.chydee.mytimetable.ui.viewmodel.MainViewModel
 import com.chydee.mytimetable.utils.*
+import com.google.android.material.appbar.MaterialToolbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import java.text.SimpleDateFormat
-import java.util.*
+import kotlinx.coroutines.flow.firstOrNull
+import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModels()
 
-    private var binding: HomeFragmentBinding by autoCleared()
+    private var binding: FragmentHomeBinding by autoCleared()
 
     private lateinit var adapter: DayEventsAdapter
+
+    @Inject
+    lateinit var prefStorage: PreferenceStorage
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = HomeFragmentBinding.inflate(inflater)
+        binding = FragmentHomeBinding.inflate(inflater)
         insetView()
         return binding.root
     }
@@ -44,6 +52,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
+        lifecycleScope.launchWhenStarted {
+            val timeTableName: String? = prefStorage.defaultTimetableName.firstOrNull()
+            timeTableName?.let {
+                Timber.d("Timetable name: $it")
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            }
+        }
         setupRecyclerView()
         // getCurrentDayLessons(getDayOfTheWeek())
         handleClickEvents()
@@ -73,17 +88,19 @@ class HomeFragment : Fragment() {
                 .setMarginTop(insets.systemWindowInsetTop)
             insets.consumeSystemWindowInsets()
         }
+
+        requireActivity().findViewById<MaterialToolbar>(R.id.topAppBar).navigationIcon = null
     }
 
 
     /**
      *  Query the database and get the lessons available for the...
      *  ...day
-     *  @param currentDayName is the day of the week
+     *  @param tableName is the default timetable name
      */
     @ExperimentalCoroutinesApi
-    private fun getCurrentDayLessons(currentDayName: String) {
-        viewModel.getLessonsForCurrentDay(currentDayName)
+    private fun getCurrentDayLessons(tableName: String) {
+        viewModel.getLessonsForCurrentDay(getDayOfTheWeek(), tableName)
         observeCurrentDayLessons()
     }
 
@@ -98,10 +115,6 @@ class HomeFragment : Fragment() {
                 hideAndShowViewsWhenLessonListIsNotEmpty()
             }
         })
-    }
-
-    private fun getDayOfTheWeek(): String {
-        return SimpleDateFormat(CURRENT_DAY_FORMAT, Locale.getDefault()).format(Date())
     }
 
     private fun setupRecyclerView() {

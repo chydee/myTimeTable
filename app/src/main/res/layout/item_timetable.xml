@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="timetable"
+            type="com.chydee.mytimetable.data.models.Timetable" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/timetableItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/timetableLabelCard"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="@dimen/dp_16"
+            app:cardBackgroundColor="@{timetable.timetableLabel}"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="@dimen/dp_14"
+            app:layout_constraintBottom_toBottomOf="@+id/timetableName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/timetableName" />
+
+        <TextView
+            android:id="@+id/timetableName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:fontFamily="@font/poppins"
+            android:text="@{timetable.tableName}"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="@dimen/sp_18"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/timetableLabelCard"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.479"
+            tools:text="PSC Timetable" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
