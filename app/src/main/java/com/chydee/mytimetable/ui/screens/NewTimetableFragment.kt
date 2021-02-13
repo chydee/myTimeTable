@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.chydee.mytimetable.ui.screens
 
 import android.graphics.Color
@@ -32,8 +34,8 @@ class NewTimetableFragment : Fragment() {
     private var binding: FragmentNewTimetableBinding by autoCleared()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentNewTimetableBinding.inflate(inflater)
