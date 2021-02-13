@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:tools="http://schemas.android.com/tools"
     android:width="371dp"
     android:height="83dp"
     android:viewportWidth="371"
-    android:viewportHeight="83">
+    android:viewportHeight="83"
+    tools:ignore="VectorRaster">
 
     <group>
 
-        <clip-path android:pathData="M10 0H361C366.523 0 371 4.47715 371 10V73C371 78.5228 366.523 83 361 83H10C4.47715 83 0 78.5228 0 73V10C0 4.47715 4.47715 0 10 0Z" />
+        <clip-path
+            android:pathData="M10 0H361C366.523 0 371 4.47715 371 10V73C371 78.5228 366.523 83 361 83H10C4.47715 83 0 78.5228 0 73V10C0 4.47715 4.47715 0 10 0Z"
+            tools:ignore="VectorRaster" />
 
         <group
             android:pivotX="185.5"

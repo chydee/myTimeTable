@@ -1,7 +1,6 @@
 package com.chydee.mytimetable.utils
 
 import android.app.Activity
-import android.graphics.Color
 import android.os.Build
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.chydee.mytimetable.R
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.snackbar.Snackbar
 
 
 fun View.show() {
@@ -36,23 +37,6 @@ fun Activity.setStatusBarColor(color: Int) {
         val window: Window = window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = color
-    }
-}
-
-fun Activity.makeStatusBarTransparent() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        window.apply {
-            clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                decorView.systemUiVisibility =
-                    (View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
-            } else {
-                decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            }
-            statusBarColor = Color.TRANSPARENT
-        }
     }
 }
 
@@ -83,4 +67,27 @@ fun Activity.navigateTo(
 
 fun Fragment.pop() {
     findNavController().popBackStack()
+}
+
+/**
+ * Remove the default Navigation Icon
+ */
+fun Fragment.removeNavIcon() {
+    requireActivity().findViewById<MaterialToolbar>(R.id.topAppBar).navigationIcon = null
+}
+
+fun View.showSnackBar(message: String) {
+    this.let {
+        Snackbar.make(it, message, Snackbar.LENGTH_LONG).show()
+    }
+}
+
+fun View.snackBarWithAction(message: String, actionName: String, action: () -> Unit) {
+    this.let {
+        Snackbar.make(it, message, Snackbar.LENGTH_LONG)
+            .setAction(actionName) {
+                action()
+            }
+            .show()
+    }
 }

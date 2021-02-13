@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme. -->
+
     <style name="Theme.myTimetable" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primaryColor</item>
@@ -21,23 +22,5 @@
         <item name="colorNavigationItem">@color/menu_item_color_state</item>
         <item name="colorNavigationItemSelected">@color/primaryDarkColor</item>
         <item name="drawableNavigationItemBackground">@drawable/menu_background_color_state</item>
-    </style>
-
-    <style name="Theme.LauncherTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="statusBarBackground">?colorOnBackground</item>
-        <item name="android:windowDisablePreview">true</item>
-        <item name="statusBarScrim">?attr/colorOnBackground</item>
-        <item name="android:statusBarColor">?attr/colorOnBackground</item>
-        <item name="android:windowAnimationStyle">@style/WindowAnimationStyle</item>
-    </style>
-
-    <style name="WindowAnimationStyle">
-        <item name="android:windowEnterAnimation">@android:anim/linear_interpolator</item>
-    </style>
-
-    <style name="Widget.Custom.NavigationView" parent="Widget.Design.NavigationView">
-        <item name="itemIconTint">?attr/colorNavigationItem</item>
-        <item name="itemTextColor">?attr/colorNavigationItem</item>
-        <item name="itemBackground">?attr/drawableNavigationItemBackground</item>
     </style>
 </resources>

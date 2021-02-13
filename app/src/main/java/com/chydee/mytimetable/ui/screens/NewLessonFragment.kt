@@ -13,7 +13,10 @@ import com.chydee.mytimetable.data.models.Color
 import com.chydee.mytimetable.databinding.FragmentNewLessonBinding
 import com.chydee.mytimetable.ui.adapters.LabelsAdapter
 import com.chydee.mytimetable.ui.viewmodel.MainViewModel
-import com.chydee.mytimetable.utils.*
+import com.chydee.mytimetable.utils.autoCleared
+import com.chydee.mytimetable.utils.colors
+import com.chydee.mytimetable.utils.setMarginTop
+import com.chydee.mytimetable.utils.takeText
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,13 +35,34 @@ class NewLessonFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentNewLessonBinding.inflate(inflater)
-        insetView()
+        /**
+         *  Inset the top view-group item so it doesn't go all the way up
+         */
+        ViewCompat.setOnApplyWindowInsetsListener(
+            binding.root.findViewById(
+                R.id.newLessonScreen
+            )
+        ) { _, insets ->
+            binding.root.findViewById<MaterialButton>(R.id.btnUp)
+                .setMarginTop(insets.systemWindowInsetTop)
+            insets.consumeSystemWindowInsets()
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.window?.statusBarColor = android.graphics.Color.TRANSPARENT
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        activity?.window?.statusBarColor = android.graphics.Color.WHITE
     }
 
     private fun loadAndSetupLabelList() {
@@ -95,12 +119,11 @@ class NewLessonFragment : Fragment() {
      *  Inset the top view-group item so it doesn't go all the way up
      */
     private fun insetView() {
-        requireActivity().makeStatusBarTransparent()
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root.findViewById(R.id.content_container)) { _, insets ->
+        /*ViewCompat.setOnApplyWindowInsetsListener(binding.root.findViewById(R.id.content_container)) { _, insets ->
             binding.root.findViewById<MaterialButton>(R.id.btnUp)
                 .setMarginTop(insets.systemWindowInsetTop)
             insets.consumeSystemWindowInsets()
-        }
+        }*/
     }
 
 

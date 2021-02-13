@@ -2,13 +2,13 @@ package com.chydee.mytimetable.ui.launcher
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.chydee.mytimetable.databinding.ActivityLauncherBinding
 import com.chydee.mytimetable.ui.base.MainActivity
-import com.chydee.mytimetable.utils.makeStatusBarTransparent
 
 class LauncherActivity : AppCompatActivity() {
 
@@ -18,7 +18,7 @@ class LauncherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLauncherBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        makeStatusBarTransparent()
+        window.statusBarColor = Color.WHITE
 
         binding.launcherMotionLayout.setTransitionListener(object :
             MotionLayout.TransitionListener {

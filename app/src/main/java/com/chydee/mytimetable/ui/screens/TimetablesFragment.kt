@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.chydee.mytimetable.databinding.FragmentTimetablesBinding
 import com.chydee.mytimetable.ui.viewmodel.MainViewModel
 import com.chydee.mytimetable.utils.autoCleared
+import com.chydee.mytimetable.utils.removeNavIcon
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +30,7 @@ class TimetablesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
+        removeNavIcon()
     }
 
 }

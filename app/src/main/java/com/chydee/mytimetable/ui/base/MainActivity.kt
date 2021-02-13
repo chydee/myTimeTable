@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private var toolBar: MaterialToolbar? = null
 
-    private val workManager: WorkManager? = null
+    private lateinit var workManager: WorkManager
 
     @Inject
     lateinit var prefStorage: PreferenceStorage
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //setStatusBarColor(android.R.attr.colorBackground)
+        binding.lifecycleOwner = this
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
@@ -134,6 +134,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
 
                 R.id.newTimetableFragment, R.id.newLessonFragment, R.id.lessonDetailsFragment -> {
+                    //setStatusBarColor(android.R.color.transparent)
                     hideBar()
                 }
                 else -> {

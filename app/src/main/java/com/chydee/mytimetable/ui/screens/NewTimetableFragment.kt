@@ -1,5 +1,6 @@
 package com.chydee.mytimetable.ui.screens
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,6 @@ import com.chydee.mytimetable.databinding.FragmentNewTimetableBinding
 import com.chydee.mytimetable.ui.adapters.DivLikeAdapter
 import com.chydee.mytimetable.ui.viewmodel.MainViewModel
 import com.chydee.mytimetable.utils.autoCleared
-import com.chydee.mytimetable.utils.makeStatusBarTransparent
 import com.chydee.mytimetable.utils.setMarginTop
 import com.chydee.mytimetable.utils.takeText
 import com.google.android.flexbox.FlexDirection
@@ -37,7 +37,18 @@ class NewTimetableFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentNewTimetableBinding.inflate(inflater)
-        insetView()
+        /**
+         *  Inset the top view-group item so it doesn't go all the way up
+         */
+        ViewCompat.setOnApplyWindowInsetsListener(
+                binding.root.findViewById(
+                        R.id.newTableScreen
+                )
+        ) { _, insets ->
+            binding.root.findViewById<MaterialButton>(R.id.btnUp)
+                    .setMarginTop(insets.systemWindowInsetTop)
+            insets.consumeSystemWindowInsets()
+        }
         return binding.root
     }
 
@@ -45,6 +56,16 @@ class NewTimetableFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         handleOnClickEvents()
         setupTagList()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.window?.statusBarColor = Color.TRANSPARENT
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        activity?.window?.statusBarColor = Color.WHITE
     }
 
     /**
@@ -87,18 +108,6 @@ class NewTimetableFragment : Fragment() {
                 Toast.makeText(context, "Error creating Timetable", Toast.LENGTH_SHORT).show()
             }
         })
-    }
-
-    /**
-     *  Inset the top view-group item so it doesn't go all the way up
-     */
-    private fun insetView() {
-        requireActivity().makeStatusBarTransparent()
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root.findViewById(R.id.newTableScreen)) { _, insets ->
-            binding.root.findViewById<MaterialButton>(R.id.btnUp)
-                .setMarginTop(insets.systemWindowInsetTop)
-            insets.consumeSystemWindowInsets()
-        }
     }
 
     /**

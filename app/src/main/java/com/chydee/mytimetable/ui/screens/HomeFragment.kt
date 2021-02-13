@@ -1,12 +1,11 @@
 package com.chydee.mytimetable.ui.screens
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -20,7 +19,6 @@ import com.chydee.mytimetable.ui.adapters.DayEventsAdapter
 import com.chydee.mytimetable.ui.adapters.OnLessonClickListener
 import com.chydee.mytimetable.ui.viewmodel.MainViewModel
 import com.chydee.mytimetable.utils.*
-import com.google.android.material.appbar.MaterialToolbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.firstOrNull
@@ -44,7 +42,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater)
-        insetView()
         return binding.root
     }
 
@@ -52,6 +49,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
+        removeNavIcon()
         lifecycleScope.launchWhenStarted {
             val timeTableName: String? = prefStorage.defaultTimetableName.firstOrNull()
             timeTableName?.let {
@@ -81,15 +79,15 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun insetView() {
-        requireActivity().makeStatusBarTransparent()
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root.findViewById(R.id.homeContentContainer)) { _, insets ->
-            binding.root.findViewById<LinearLayout>(R.id.homeLayoutGroup)
-                .setMarginTop(insets.systemWindowInsetTop)
-            insets.consumeSystemWindowInsets()
-        }
 
-        requireActivity().findViewById<MaterialToolbar>(R.id.topAppBar).navigationIcon = null
+    override fun onResume() {
+        super.onResume()
+        activity?.window?.statusBarColor = Color.WHITE
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        activity?.window?.statusBarColor = Color.WHITE
     }
 
 
