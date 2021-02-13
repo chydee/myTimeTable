@@ -4,11 +4,18 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.motion.widget.MotionLayout
+import com.chydee.mytimetable.R
 import com.chydee.mytimetable.databinding.ActivityLauncherBinding
 import com.chydee.mytimetable.ui.base.MainActivity
+import java.util.*
+
+const val splashTimeout = 2000L
 
 class LauncherActivity : AppCompatActivity() {
 
@@ -20,21 +27,13 @@ class LauncherActivity : AppCompatActivity() {
         setContentView(binding.root)
         window.statusBarColor = Color.WHITE
 
-        binding.launcherMotionLayout.setTransitionListener(object :
-            MotionLayout.TransitionListener {
-            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
-            }
+        Handler(Looper.getMainLooper()).postDelayed({
+            startActivity(Intent(this@LauncherActivity, MainActivity::class.java))
+        }, splashTimeout)
 
-            override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-            }
+        val anim: Animation = AnimationUtils.loadAnimation(this, R.anim.splash_animation)
+        binding.logo.startAnimation(anim)
 
-            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-                startActivity(Intent(this@LauncherActivity, MainActivity::class.java))
-            }
-
-            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
-            }
-        })
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
