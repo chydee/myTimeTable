@@ -76,5 +76,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home_menu_item">Home</string>
     <string name="my_timetables_menu_item">My Timetables</string>
+    <string name="add_tag_hint">Add tag</string>
     <!--Error messages-->
 </resources>

@@ -1,23 +1,23 @@
 package com.chydee.mytimetable.ui.screens
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.format.DateFormat.is24HourFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.chydee.mytimetable.R
-import com.chydee.mytimetable.data.models.Color
 import com.chydee.mytimetable.databinding.FragmentNewLessonBinding
-import com.chydee.mytimetable.ui.adapters.LabelsAdapter
 import com.chydee.mytimetable.ui.viewmodel.MainViewModel
 import com.chydee.mytimetable.utils.autoCleared
-import com.chydee.mytimetable.utils.colors
 import com.chydee.mytimetable.utils.setMarginTop
 import com.chydee.mytimetable.utils.takeText
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -27,11 +27,12 @@ class NewLessonFragment : Fragment() {
     private val viewModel: MainViewModel by viewModels()
     private var binding: FragmentNewLessonBinding by autoCleared()
 
-    private lateinit var labelsAdapter: LabelsAdapter
+    private var startTime: String = "00:00"
+    private var endTime: String = "00:00"
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentNewLessonBinding.inflate(inflater)
@@ -39,20 +40,38 @@ class NewLessonFragment : Fragment() {
          *  Inset the top view-group item so it doesn't go all the way up
          */
         ViewCompat.setOnApplyWindowInsetsListener(
-            binding.root.findViewById(
-                R.id.newLessonScreen
-            )
+                binding.root.findViewById(
+                        R.id.newLessonScreen
+                )
         ) { _, insets ->
             binding.root.findViewById<MaterialButton>(R.id.btnUp)
-                .setMarginTop(insets.systemWindowInsetTop)
+                    .setMarginTop(insets.systemWindowInsetTop)
+            binding.root.findViewById<MaterialButton>(R.id.btnSaveLesson)
+                    .setMarginTop(insets.systemWindowInsetTop)
             insets.consumeSystemWindowInsets()
         }
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
+        binding.model = viewModel
+
+        binding.fromTextInputLayout.setOnTouchListener { _, _ ->
+            timePicker("Select Start Time", "From").show(childFragmentManager, "FromTimePicker")
+            true
+        }
+        binding.toTextInputLayout.setOnTouchListener { _, _ ->
+            timePicker("Select End Time", "To").show(childFragmentManager, "ToTimePicker")
+            true
+        }
+        viewModel.timetableName.observe(viewLifecycleOwner, {
+            if (it.isNotEmpty()) {
+                binding.btnUp.text = it
+            }
+        })
     }
 
     override fun onResume() {
@@ -63,28 +82,6 @@ class NewLessonFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         activity?.window?.statusBarColor = android.graphics.Color.WHITE
-    }
-
-    private fun loadAndSetupLabelList() {
-        val layoutManager = LinearLayoutManager(requireContext())
-
-        binding.labelsRecyclerView.layoutManager = layoutManager
-
-        labelsAdapter = LabelsAdapter()
-
-        with(binding) {
-            labelsRecyclerView.adapter = labelsAdapter
-            labelsAdapter.submitList(colors)
-            labelsRecyclerView.setHasFixedSize(true)
-            labelsRecyclerView.isNestedScrollingEnabled = false
-        }
-
-        labelsAdapter.setOnLabelClickListener(object : LabelsAdapter.OnItemClickListener {
-            override fun onLabelClicked(color: Color) {
-                TODO("Not yet implemented")
-            }
-        })
-
     }
 
     private fun isValidated(): Boolean {
@@ -115,15 +112,32 @@ class NewLessonFragment : Fragment() {
         return true
     }
 
-    /**
-     *  Inset the top view-group item so it doesn't go all the way up
-     */
-    private fun insetView() {
-        /*ViewCompat.setOnApplyWindowInsetsListener(binding.root.findViewById(R.id.content_container)) { _, insets ->
-            binding.root.findViewById<MaterialButton>(R.id.btnUp)
-                .setMarginTop(insets.systemWindowInsetTop)
-            insets.consumeSystemWindowInsets()
-        }*/
+    private fun timePicker(title: String, timeType: String): MaterialTimePicker {
+
+        val isSystem24Hour = is24HourFormat(requireContext())
+        val clockFormat = if (isSystem24Hour) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
+        val picker = MaterialTimePicker.Builder()
+                .setTitleText(title)
+                .setTimeFormat(clockFormat)
+                .setHour(12)
+                .setMinute(10)
+                .build()
+
+        picker.addOnPositiveButtonClickListener {
+            if (timeType == "From") {
+                startTime = "${picker.hour}:${picker.minute}"
+                binding.fromInput.setText(startTime)
+            } else {
+                endTime = "${picker.hour}:${picker.minute}"
+                binding.toInput.setText(endTime)
+            }
+            picker.dismiss()
+        }
+        picker.addOnNegativeButtonClickListener {
+            picker.dismiss()
+        }
+
+        return picker
     }
 
 

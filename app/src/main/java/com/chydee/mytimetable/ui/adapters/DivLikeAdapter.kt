@@ -8,14 +8,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chydee.mytimetable.R
 
 class DivLikeAdapter(private val mItems: ArrayList<String>) :
-    RecyclerView.Adapter<DivLikeAdapter.DivItemViewHolder>() {
+        RecyclerView.Adapter<DivLikeAdapter.DivItemViewHolder>() {
+
+    interface OnTagClickListener {
+        fun onTagClicked(text: String)
+    }
+
+    private lateinit var listener: OnTagClickListener
+
+    internal fun setOnLabelClickListener(listener: OnTagClickListener) {
+        this.listener = listener
+    }
 
     override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
+            parent: ViewGroup,
+            viewType: Int
     ): DivLikeAdapter.DivItemViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_timetable_tag, parent, false)
+                .inflate(R.layout.item_timetable_tag, parent, false)
         return DivItemViewHolder(view)
     }
 
@@ -28,11 +38,14 @@ class DivLikeAdapter(private val mItems: ArrayList<String>) :
     }
 
     inner class DivItemViewHolder constructor(itemView: View) : RecyclerView.ViewHolder
-        (itemView) {
+    (itemView) {
         private val text: TextView = itemView.findViewById(R.id.timetableTagText)
 
         fun onBind(position: Int) {
             text.text = mItems[position]
+            text.setOnClickListener {
+                listener.onTagClicked(mItems[position])
+            }
         }
     }
 }

@@ -78,14 +78,14 @@
 
                         <TextView
                             android:id="@+id/textBtnClickToSeeDetails"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackgroundBorderless"
                             android:fontFamily="@font/poppins"
                             android:text="@string/click_to_see_details"
                             android:textColor="@color/primaryTextColor"
                             android:textSize="@dimen/sp_10"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/classInTextView"
                             app:layout_constraintStart_toStartOf="@+id/classInTextView"
                             app:layout_constraintTop_toBottomOf="@+id/classInTextView" />
 
@@ -132,6 +132,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dp_20"
                         android:layout_gravity="end"
+                        android:background="?attr/selectableItemBackgroundBorderless"
                         android:fontFamily="@font/poppins"
                         android:gravity="end"
                         android:text="@string/see_all"

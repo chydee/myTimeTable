@@ -7,19 +7,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.chydee.mytimetable.R
 import com.chydee.mytimetable.data.models.Timetable
 import com.chydee.mytimetable.databinding.FragmentNewTimetableBinding
 import com.chydee.mytimetable.ui.adapters.DivLikeAdapter
+import com.chydee.mytimetable.ui.adapters.LabelsAdapter
 import com.chydee.mytimetable.ui.viewmodel.MainViewModel
-import com.chydee.mytimetable.utils.autoCleared
-import com.chydee.mytimetable.utils.setMarginTop
-import com.chydee.mytimetable.utils.takeText
+import com.chydee.mytimetable.utils.*
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
@@ -32,6 +31,10 @@ class NewTimetableFragment : Fragment() {
     private val viewModel: MainViewModel by viewModels()
 
     private var binding: FragmentNewTimetableBinding by autoCleared()
+
+    private lateinit var labelsAdapter: LabelsAdapter
+
+    private var tableLabel: Int = R.color.primaryDarkColor
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -75,6 +78,7 @@ class NewTimetableFragment : Fragment() {
      */
     private fun handleOnClickEvents() {
         binding.btnContinue.setOnClickListener {
+            it.isEnabled = false
             validateAndContinue()
         }
         binding.btnUp.setOnClickListener { findNavController().popBackStack() }
@@ -85,29 +89,29 @@ class NewTimetableFragment : Fragment() {
      */
     private fun validateAndContinue() {
         val name = binding.timetableNameInput.takeText()
-
+        val tag = binding.selectedTimetableTagText.text.toString()
         if (name.isEmpty()) {
-            binding.timetableNameTextInputLayout.error = "Timetable name is empty"
+            binding.timetableNameTextInputLayout.error = "Timetable name cannot be empty"
         } else {
-            saveTimetableName(name)
+            saveTimetableName(name, tag)
         }
     }
 
     /**
      *  Save Timetable to database
      */
-    private fun saveTimetableName(tableName: String) {
-        val timetable = Timetable(tableName = tableName)
+    private fun saveTimetableName(tableName: String, tag: String) {
+        val timetable = Timetable(tableName = tableName, tableTag = tag, timetableLabel = tableLabel)
         viewModel.saveTimetableInfo(timetable)
         observePropertyTimetable()
     }
 
     private fun observePropertyTimetable() {
         viewModel.timetableName.observe(viewLifecycleOwner, {
-            if (it.isNotBlank()) {
+            if (it.isNotEmpty()) {
                 findNavController().navigate(NewTimetableFragmentDirections.actionNewTimetableFragmentToNewLessonFragment())
             } else {
-                Toast.makeText(context, "Error creating Timetable", Toast.LENGTH_SHORT).show()
+                binding.root.showSnackBar("Error creating Timetable")
             }
         })
     }
@@ -123,15 +127,45 @@ class NewTimetableFragment : Fragment() {
         recyclerView.layoutManager = layoutManager
 
         val divLikeContent = ArrayList<String>()
-        divLikeContent.add("Route")
-        divLikeContent.add("No calls during the ride")
-        divLikeContent.add("Smell")
-        divLikeContent.add("Less talk")
-        divLikeContent.add("Safety")
+        divLikeContent.add("Exam")
+        divLikeContent.add("Test")
+        divLikeContent.add("Practical")
+        divLikeContent.add("Sanitation")
+        divLikeContent.add("Class")
 
         val adapter = DivLikeAdapter(divLikeContent)
 
         recyclerView.adapter = adapter
+
+        adapter.setOnLabelClickListener(object : DivLikeAdapter.OnTagClickListener {
+            override fun onTagClicked(text: String) {
+                binding.selectedTimetableTagText.text = text
+            }
+        })
+
+        loadAndSetupLabelList()
+    }
+
+    private fun loadAndSetupLabelList() {
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        binding.labelsRecyclerView.layoutManager = layoutManager
+
+        labelsAdapter = LabelsAdapter()
+
+        with(binding) {
+            labelsRecyclerView.adapter = labelsAdapter
+            labelsAdapter.submitList(colors)
+            labelsRecyclerView.setHasFixedSize(true)
+            labelsRecyclerView.isNestedScrollingEnabled = false
+        }
+
+        labelsAdapter.setOnLabelClickListener(object : LabelsAdapter.OnItemClickListener {
+            override fun onLabelClicked(color: com.chydee.mytimetable.data.models.Color) {
+                tableLabel = color.colorRes
+            }
+        })
+
     }
 
 }

@@ -6,15 +6,17 @@
         android:id="@+id/labelCard"
         android:layout_width="24dp"
         android:layout_height="24dp"
+        android:layout_margin="5dp"
         app:cardBackgroundColor="@color/secondaryTextColor"
         app:cardCornerRadius="4dp"
-        app:cardElevation="@dimen/dp_14">
+        app:cardElevation="4dp">
 
         <ImageView
             android:id="@+id/checkImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
+            android:visibility="invisible"
             android:contentDescription="@string/check_image_desc"
             app:srcCompat="@drawable/ic_baseline_check" />
     </com.google.android.material.card.MaterialCardView>

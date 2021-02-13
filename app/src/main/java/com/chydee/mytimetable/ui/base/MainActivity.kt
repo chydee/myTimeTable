@@ -108,10 +108,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         item.isChecked = true
         when (item.itemId) {
             R.id.homeFragment -> navigateTo(navController, R.id.homeFragment)
-            R.id.timetablesFragment -> navigateTo(
-                navController,
-                R.id.action_global_timetablesFragment
-            )
+            R.id.timetablesFragment -> navigateTo(navController, R.id.action_global_timetablesFragment)
             R.id.settingsFragment -> navigateTo(navController, R.id.action_global_settingsFragment)
             R.id.aboutFragment -> navigateTo(navController, R.id.action_global_aboutFragment)
             else -> navigateTo(navController, R.id.homeFragment)
@@ -139,6 +136,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
                 else -> {
                     Timber.d("NoSuchID")
+                    binding.screenTitle.text = destination.label
                     showBar()
                 }
             }

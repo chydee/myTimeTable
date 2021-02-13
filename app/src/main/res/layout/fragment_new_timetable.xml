@@ -6,8 +6,8 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/newTableScreen"
         android:layout_width="match_parent"
-        android:fitsSystemWindows="true"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         tools:context=".ui.screens.NewTimetableFragment">
 
         <ImageView
@@ -73,16 +73,54 @@
                         android:textSize="@dimen/sp_14" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:id="@+id/labelTextLabel"
+                    style="@style/NewLessonLabels"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_30"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginEnd="@dimen/dp_30"
+                    android:text="@string/label_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/timetableNameTextInputLayout" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/labelsRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintEnd_toEndOf="@+id/labelTextLabel"
+                    app:layout_constraintStart_toStartOf="@+id/labelTextLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/labelTextLabel"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_labels" />
+
+                <TextView
+                    android:id="@+id/selectedTimetableTagText"
+                    style="@style/NewLessonLabels"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_30"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginEnd="@dimen/dp_30"
+                    android:text="@string/add_tag_hint"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/labelsRecyclerView" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/timetableTagsRecyclerView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_16"
                     android:nestedScrollingEnabled="false"
-                    app:layout_constraintEnd_toEndOf="@+id/timetableNameTextInputLayout"
+                    app:layout_constraintEnd_toEndOf="@+id/selectedTimetableTagText"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/timetableNameTextInputLayout"
-                    app:layout_constraintTop_toBottomOf="@id/timetableNameTextInputLayout"
+                    app:layout_constraintStart_toStartOf="@+id/selectedTimetableTagText"
+                    app:layout_constraintTop_toBottomOf="@id/selectedTimetableTagText"
                     tools:listitem="@layout/item_timetable_tag" />
 
                 <com.google.android.material.button.MaterialButton

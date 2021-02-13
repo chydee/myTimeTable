@@ -47,15 +47,15 @@ fun View.setMarginTop(marginTop: Int) {
 }
 
 fun Activity.navigateTo(
-    navController: NavController,
-    @IdRes destination: Int,
-    popCurrentDes: Boolean = false
+        navController: NavController,
+        @IdRes destination: Int,
+        popCurrentDes: Boolean = false
 ) {
     val builder = NavOptions.Builder()
-        .setEnterAnim(R.anim.slide_in_right)
-        .setExitAnim(R.anim.slide_out_left)
-        .setPopEnterAnim(R.anim.fade_in)
-        .setPopExitAnim(R.anim.fade_out)
+            .setEnterAnim(R.anim.slide_in_right)
+            .setExitAnim(R.anim.slide_out_left)
+            .setPopEnterAnim(R.anim.fade_in)
+            .setPopExitAnim(R.anim.fade_out)
 
     if (popCurrentDes) { // removes CurrentDes from back stack
         builder.setLaunchSingleTop(true)
@@ -85,9 +85,10 @@ fun View.showSnackBar(message: String) {
 fun View.snackBarWithAction(message: String, actionName: String, action: () -> Unit) {
     this.let {
         Snackbar.make(it, message, Snackbar.LENGTH_LONG)
-            .setAction(actionName) {
-                action()
-            }
-            .show()
+                .setAction(actionName) {
+                    action()
+                }
+                .show()
     }
 }
+

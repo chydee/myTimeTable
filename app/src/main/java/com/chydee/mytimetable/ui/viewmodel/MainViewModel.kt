@@ -1,5 +1,8 @@
+@file:Suppress("DEPRECATION")
+
 package com.chydee.mytimetable.ui.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,9 +14,8 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
-import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private val dbImpl: DBHelperImpl) : ViewModel() {
+class MainViewModel @ViewModelInject constructor(private val dbImpl: DBHelperImpl) : ViewModel() {
 
     private var viewModelJob = SupervisorJob()
     private val scope = CoroutineScope(viewModelJob + Dispatchers.IO)
@@ -26,8 +28,8 @@ class MainViewModel @Inject constructor(private val dbImpl: DBHelperImpl) : View
     val timetableName: LiveData<String>
         get() = _timetableName
 
-    fun setTimetableName(text: String) {
-        _timetableName.value = text
+    private fun setTimetableName(text: String) {
+        _timetableName.postValue(text)
     }
 
 
@@ -163,10 +165,10 @@ class MainViewModel @Inject constructor(private val dbImpl: DBHelperImpl) : View
                 Timber.d(ex.localizedMessage)
                 _currentDayLessons.postValue(null)
             }
-                .collect { lessons ->
-                    _currentDayLessons.postValue(lessons)
-                    Status.SUCCESS
-                }
+                    .collect { lessons ->
+                        _currentDayLessons.postValue(lessons)
+                        Status.SUCCESS
+                    }
         }
     }
 

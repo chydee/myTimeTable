@@ -1,6 +1,7 @@
 package com.chydee.mytimetable.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -36,10 +37,11 @@ class LabelsAdapter : RecyclerView.Adapter<LabelsAdapter.MyViewHolder>() {
 
 
     inner class MyViewHolder(private val binding: ItemLabelsBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+            RecyclerView.ViewHolder(binding.root) {
         fun bind(color: Color) {
             with(binding) {
                 labelCard.setOnClickListener {
+                    checkImageView.visibility = View.VISIBLE
                     listener.onLabelClicked(color)
                 }
                 labelCard.setCardBackgroundColor(color.colorRes)
