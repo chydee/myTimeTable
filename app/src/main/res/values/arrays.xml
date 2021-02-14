@@ -9,24 +9,4 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
-
-    <string-array name="day_of_week_entries">
-        <item>Sunday</item> <!-- sunday -->
-        <item>Monday</item> <!-- monday -->
-        <item>Tuesday</item>
-        <item>Wednesday</item>
-        <item>Thursday</item>
-        <item>Friday</item>
-        <item>Saturday</item> <!-- saturday -->
-    </string-array>
-
-    <string-array name="day_of_week_values">
-        <item>Sun</item> <!-- sunday -->
-        <item>Mon</item> <!-- monday -->
-        <item>Tue</item>
-        <item>Wed</item>
-        <item>Thur</item>
-        <item>Fri</item>
-        <item>Sat</item> <!-- saturday -->
-    </string-array>
 </resources>
