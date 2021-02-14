@@ -69,6 +69,10 @@ fun Fragment.pop() {
     findNavController().popBackStack()
 }
 
+fun Fragment.pop(@IdRes destination: Int, inclusive: Boolean) {
+    findNavController().popBackStack(destination, inclusive)
+}
+
 /**
  * Remove the default Navigation Icon
  */

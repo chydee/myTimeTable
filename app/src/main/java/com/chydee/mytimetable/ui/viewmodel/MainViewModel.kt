@@ -24,12 +24,12 @@ class MainViewModel @ViewModelInject constructor(private val dbImpl: DBHelperImp
     val currentDayLessons: LiveData<List<Lesson>>
         get() = _currentDayLessons
 
-    private val _timetableName = MutableLiveData<String>()
-    val timetableName: LiveData<String>
-        get() = _timetableName
+    private val _timetable = MutableLiveData<Timetable>()
+    val timetable: LiveData<Timetable>
+        get() = _timetable
 
-    private fun setTimetableName(text: String) {
-        _timetableName.postValue(text)
+    private fun setTimetable(timetable: Timetable) {
+        _timetable.postValue(timetable)
     }
 
 
@@ -37,15 +37,22 @@ class MainViewModel @ViewModelInject constructor(private val dbImpl: DBHelperImp
     val lesson: LiveData<Lesson>
         get() = _lesson
 
+    private val _lessons = MutableLiveData<List<Lesson>>()
+    val lessons: LiveData<List<Lesson>>
+        get() = _lessons
+
 
     fun addLesson(lesson: Lesson) {
-        Status.LOADING
         scope.launch {
-            withContext(Dispatchers.Default) {
-                dbImpl.insert(lesson)
-                Status.SUCCESS
+            try {
+                withContext(Dispatchers.Default) {
+                    dbImpl.insert(lesson)
+                    _lesson.postValue(lesson)
+                }
+            } catch (ex: Exception) {
+                _lesson.postValue(null)
+                Timber.d(ex)
             }
-
         }
     }
 
@@ -55,10 +62,10 @@ class MainViewModel @ViewModelInject constructor(private val dbImpl: DBHelperImp
             try {
                 withContext(Dispatchers.Default) {
                     dbImpl.insert(lessons)
-                    Status.SUCCESS
+                    _lessons.postValue(lessons)
                 }
             } catch (ex: Exception) {
-                Status.ERROR
+                _lessons.postValue(emptyList())
                 Timber.d(ex)
             }
         }
@@ -69,11 +76,11 @@ class MainViewModel @ViewModelInject constructor(private val dbImpl: DBHelperImp
             Status.LOADING
             try {
                 dbImpl.insert(timetable)
-                setTimetableName(timetable.tableName)
+                setTimetable(timetable)
                 Status.SUCCESS
             } catch (ex: Exception) {
                 Status.ERROR
-                Timber.d(ex)
+                ex.printStackTrace()
             }
         }
     }

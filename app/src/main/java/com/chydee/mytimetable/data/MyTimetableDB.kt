@@ -7,7 +7,7 @@ import com.chydee.mytimetable.data.dao.TimetableDao
 import com.chydee.mytimetable.data.models.Lesson
 import com.chydee.mytimetable.data.models.Timetable
 
-@Database(entities = [Lesson::class, Timetable::class], version = 1, exportSchema = false)
+@Database(entities = [Lesson::class, Timetable::class], version = 2, exportSchema = false)
 abstract class MyTimetableDB : RoomDatabase() {
     abstract val lessonDao: LessonDao
     abstract val timetableDao: TimetableDao

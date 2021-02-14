@@ -45,6 +45,7 @@ val colors = arrayListOf(
         Color("Light-Gray", Colors.LTGRAY)
 )
 
+
 fun getDayOfTheWeek(): String {
     return SimpleDateFormat(CURRENT_DAY_FORMAT, Locale.getDefault()).format(Date())
 }

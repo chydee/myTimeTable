@@ -14,7 +14,7 @@
         android:id="@+id/newLessonScreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:fitsSystemWindows="true"
         tools:context=".ui.screens.NewLessonFragment">
 
         <ImageView
@@ -109,6 +109,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_15"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:hint="@string/description_hint"
                     app:hintEnabled="true"
                     app:layout_constraintEnd_toEndOf="@+id/labelTextBasic"
@@ -120,6 +122,7 @@
                         android:id="@+id/descriptionInput"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:editable="false"
                         android:fontFamily="@font/poppins"
                         android:inputType="text"
                         android:singleLine="true"
@@ -221,19 +224,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_16"
-                    android:hint="@string/place_hint"
+                    app:endIconDrawable="@drawable/ic_chevron_down"
+                    app:endIconMode="custom"
                     app:hintEnabled="false"
                     app:layout_constraintStart_toStartOf="@+id/labelTextBasic"
-                    app:layout_constraintTop_toBottomOf="@+id/dayTextLabel"
-                    app:startIconDrawable="@drawable/ic_chevron_down">
+                    app:layout_constraintTop_toBottomOf="@+id/dayTextLabel">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/dayInput"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:fontFamily="@font/poppins"
-                        android:inputType="text"
-                        android:maxLength="3"
+                        android:inputType="none"
+                        android:maxLength="4"
                         android:singleLine="true"
                         android:text="@string/day_hint_text"
                         android:textColor="@color/extra_data_text_color"
@@ -246,17 +251,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_16"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toStartOf="@+id/toTextInputLayout"
                     app:layout_constraintStart_toEndOf="@+id/dayTextInputLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/dayTextLabel">
+                    app:layout_constraintTop_toBottomOf="@+id/dayTextLabel"
+                    app:placeholderText="@string/default_time">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/fromInput"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:clickable="true"
                         android:editable="false"
+                        android:focusable="true"
                         android:fontFamily="@font/poppins"
-                        android:inputType="time"
+                        android:inputType="none"
                         android:singleLine="true"
                         android:text="@string/default_time"
                         android:textColor="@color/extra_data_text_color"
@@ -269,16 +278,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_16"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="@+id/placeTextInputLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/dayTextLabel">
+                    app:layout_constraintTop_toBottomOf="@+id/dayTextLabel"
+                    app:placeholderText="@string/default_time">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/toInput"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:clickable="true"
                         android:editable="false"
+                        android:focusable="true"
                         android:fontFamily="@font/poppins"
-                        android:inputType="time"
+                        android:inputType="none"
                         android:singleLine="true"
                         android:text="@string/default_time"
                         android:textColor="@color/extra_data_text_color"
@@ -295,7 +308,8 @@
                     android:textSize="@dimen/sp_14"
                     app:layout_constraintEnd_toEndOf="@+id/toTextInputLayout"
                     app:layout_constraintStart_toStartOf="@+id/dayTextInputLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/dayTextInputLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/dayTextInputLayout"
+                    app:useMaterialThemeColors="true" />
 
                 <TextView
                     android:id="@+id/batchModeDetails"
@@ -321,7 +335,7 @@
             android:layout_marginStart="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_16"
             android:fontFamily="@font/poppins"
-            android:text='@{model.timetableName ?? "Cancel"}'
+            android:text="@string/btn_up_text"
             android:textColor="@color/secondaryTextColor"
             app:backgroundTint="@color/primaryTextColor"
             app:cornerRadius="@dimen/dp_10"

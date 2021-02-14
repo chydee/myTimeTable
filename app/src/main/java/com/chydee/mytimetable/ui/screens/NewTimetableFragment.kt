@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chydee.mytimetable.R
@@ -28,7 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NewTimetableFragment : Fragment() {
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by activityViewModels()
 
     private var binding: FragmentNewTimetableBinding by autoCleared()
 
@@ -107,8 +107,8 @@ class NewTimetableFragment : Fragment() {
     }
 
     private fun observePropertyTimetable() {
-        viewModel.timetableName.observe(viewLifecycleOwner, {
-            if (it.isNotEmpty()) {
+        viewModel.timetable.observe(viewLifecycleOwner, {
+            if (it != null) {
                 findNavController().navigate(NewTimetableFragmentDirections.actionNewTimetableFragmentToNewLessonFragment())
             } else {
                 binding.root.showSnackBar("Error creating Timetable")
