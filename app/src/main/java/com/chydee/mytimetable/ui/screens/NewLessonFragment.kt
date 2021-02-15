@@ -106,7 +106,7 @@ class NewLessonFragment : Fragment() {
                         courseDescription = binding.descriptionInput.takeText(),
                         courseTutor = binding.teacherInput.takeText(),
                         place = binding.placeInput.takeText(),
-                        dayOfWeek = binding.dayInput.takeText(),
+                        dayOfWeek = convertDayToNumber(binding.dayInput.takeText()),
                         startTime = binding.fromInput.takeText(),
                         endTime = binding.toInput.takeText(),
                         illusID = getSubjectAvatar(binding.titleInput.takeText())
@@ -278,12 +278,13 @@ class NewLessonFragment : Fragment() {
 
     private fun formatDayOfWeek(day: String): String? {
         return when (day) {
-            days[0] -> "Mon"
-            days[1] -> "Tue"
-            days[2] -> "Wed"
-            days[3] -> "Thur"
-            days[4] -> "Fri"
-            days[5] -> "Sat"
+            days[0] -> "Sun"
+            days[1] -> "Mon"
+            days[2] -> "Tue"
+            days[3] -> "Wed"
+            days[4] -> "Thur"
+            days[5] -> "Fri"
+            days[6] -> "Sat"
             else -> null
         }
     }

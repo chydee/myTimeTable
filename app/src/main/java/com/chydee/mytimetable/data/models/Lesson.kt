@@ -16,7 +16,7 @@ data class Lesson(
         @ColumnInfo(name = "course_description") val courseDescription: String,
         @ColumnInfo(name = "course_tutor") val courseTutor: String,
         @ColumnInfo(name = "place") val place: String,
-        @ColumnInfo(name = "day_of_week") val dayOfWeek: String,
+        @ColumnInfo(name = "day_of_week") val dayOfWeek: Int,
         @ColumnInfo(name = "start_time") val startTime: String,
         @ColumnInfo(name = "end_time") val endTime: String,
         @ColumnInfo(name = "lesson_illustration") val illusID: Int = R.drawable.ic__05_archive

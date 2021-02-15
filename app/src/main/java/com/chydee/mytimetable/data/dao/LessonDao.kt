@@ -54,7 +54,7 @@ interface LessonDao {
      * Get all periods from period_table
      *
      */
-    @Query("SELECT * FROM $LESSON_TABLE_NAME WHERE timetable_name LIKE :tableName ORDER BY id DESC")
+    @Query("SELECT * FROM $LESSON_TABLE_NAME WHERE timetable_name LIKE :tableName ORDER BY day_of_week ASC")
     fun getAllLessons(tableName: String): Flow<List<Lesson>>
 
     /**
@@ -63,14 +63,14 @@ interface LessonDao {
      *  ... Current day of the week is equal to...
      *  ... @param today
      */
-    @Query("SELECT * FROM $LESSON_TABLE_NAME WHERE timetable_name LIKE :tableName AND  day_of_week LIKE :today")
+    @Query("SELECT * FROM $LESSON_TABLE_NAME WHERE timetable_name LIKE :tableName AND  day_of_week LIKE :today ORDER BY day_of_week ASC")
     fun getTodayLessons(today: String, tableName: String): Flow<List<Lesson>>
 
-    @Query("SELECT * FROM $LESSON_TABLE_NAME WHERE timetable_name LIKE :tableName AND day_of_week LIKE :today")
+    @Query("SELECT * FROM $LESSON_TABLE_NAME WHERE timetable_name LIKE :tableName AND day_of_week LIKE :today ORDER BY day_of_week ASC")
     fun getTodayClasses(today: String, tableName: String): List<Lesson>
 
     @ExperimentalCoroutinesApi
     fun getTodayLessonDistinctUntilChanged(today: String, tableName: String) =
-        getTodayLessons(today, tableName).distinctUntilChanged()
+            getTodayLessons(today, tableName).distinctUntilChanged()
 
 }

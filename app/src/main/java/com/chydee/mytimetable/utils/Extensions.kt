@@ -96,3 +96,16 @@ fun View.snackBarWithAction(message: String, actionName: String, action: () -> U
     }
 }
 
+fun Fragment.convertDayToNumber(day: String): Int {
+    return when (day) {
+        "Sun" -> 1
+        "Mon" -> 2
+        "Tue" -> 3
+        "Wed" -> 4
+        "Thur" -> 5
+        "Fri" -> 6
+        "Sat" -> 7
+        else -> 0
+    }
+}
+
