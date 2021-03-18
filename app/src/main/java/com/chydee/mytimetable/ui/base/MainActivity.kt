@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageButton
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -108,7 +109,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         item.isChecked = true
         when (item.itemId) {
             R.id.homeFragment -> navigateTo(navController, R.id.homeFragment)
-            R.id.timetablesFragment -> navigateTo(navController, R.id.action_global_timetablesFragment)
+            R.id.timetablesFragment -> navigateTo(
+                navController,
+                R.id.action_global_timetablesFragment
+            )
             R.id.settingsFragment -> navigateTo(navController, R.id.action_global_settingsFragment)
             R.id.aboutFragment -> navigateTo(navController, R.id.action_global_aboutFragment)
             else -> navigateTo(navController, R.id.homeFragment)
@@ -128,10 +132,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             when (destination.id) {
                 R.id.homeFragment -> {
                     showBar()
+                    binding.screenTitle.text = destination.label
                 }
 
                 R.id.newTimetableFragment, R.id.newLessonFragment, R.id.lessonDetailsFragment -> {
-                    //setStatusBarColor(android.R.color.transparent)
                     hideBar()
                 }
                 else -> {
@@ -166,6 +170,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
         toggle.isDrawerIndicatorEnabled = false
         toolBar?.navigationIcon = null
+
+        val headerLayout: View = binding.navigationView.getHeaderView(0)
+        headerLayout.findViewById<ImageButton>(R.id.btnClose).setOnClickListener {
+            closeDrawer()
+        }
     }
 
     /**
@@ -232,7 +241,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         viewModel.currentDayLessons.observe(this, {
             if (it.isNotEmpty()) {
                 val text = getString(R.string.class_in, it[0].courseTitle, it[0].startTime)
-
             } else {
             }
         })
