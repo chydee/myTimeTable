@@ -130,7 +130,7 @@ class NewTimetableFragment : Fragment() {
         divLikeContent.add("Exam")
         divLikeContent.add("Test")
         divLikeContent.add("Practical")
-        divLikeContent.add("Sanitation")
+        divLikeContent.add("Roaster")
         divLikeContent.add("Class")
 
         val adapter = DivLikeAdapter(divLikeContent)
